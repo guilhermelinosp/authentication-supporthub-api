@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Dtos\Requests\Consumers\" />
+      <Folder Include="Dtos\Requests\Employeers\" />
+      <Folder Include="Dtos\Responses\Consumers\" />
+      <Folder Include="Dtos\Responses\Employeers\" />
+    </ItemGroup>
+
+</Project>
