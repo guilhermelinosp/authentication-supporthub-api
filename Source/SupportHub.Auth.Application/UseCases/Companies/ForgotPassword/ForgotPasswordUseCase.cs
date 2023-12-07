@@ -8,9 +8,9 @@ using SupportHub.Auth.Domain.Shared.Returns;
 namespace SupportHub.Auth.Application.UseCases.Companies.ForgotPassword;
 
 public class ForgotPasswordUseCase(
-        ICompanyRepository repository, 
-        IEncryptService encrypt, 
-        ISendGrid sendGrid)
+    ICompanyRepository repository,
+    IEncryptService encrypt,
+    ISendGrid sendGrid)
     : IForgotPasswordUseCase
 {
     public async Task ExecuteAsync(RequestForgotPassword request)

@@ -22,7 +22,7 @@ public class SendGrid(IConfiguration configuration) : ISendGrid
 
         <p><strong>{code}</strong></p>
 
-        <p>If you did not create an account with Test API or have any concerns, please contact our support team at {configuration["SendGrid:Email"]}.</p>
+        <p>If you did not create an account with Test API or have any concerns, please contact our support team at {configuration["SendGrid:FromEmail"]}.</p>
 
         <p>Welcome aboard, and thank you for choosing Test API!</p>
 
@@ -49,7 +49,7 @@ public class SendGrid(IConfiguration configuration) : ISendGrid
 
         <p><strong>{code}</strong></p>
 
-        <p>If you did not request a password reset or have any concerns, please contact our support team at {configuration["SendGrid:Email"]}.</p>
+        <p>If you did not request a password reset or have any concerns, please contact our support team at {configuration["SendGrid:FromEmail"]}.</p>
 
         <p>Thank you for choosing Test API. Your account security is important to us!</p>
 
@@ -76,7 +76,7 @@ public class SendGrid(IConfiguration configuration) : ISendGrid
 
         <p><strong>{code}</strong></p>
 
-        <p>If you did not initiate this sign-in or have any concerns, please contact our support team at {configuration["SendGrid:Email"]}.</p>
+        <p>If you did not initiate this sign-in or have any concerns, please contact our support team at {configuration["SendGrid:FromEmail"]}.</p>
 
         <p>Thank you for choosing Test API. We appreciate your security commitment!</p>
 

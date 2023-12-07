@@ -10,6 +10,5 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         builder
             .HasKey(c => c.CustomerId);
-
     }
 }

@@ -68,7 +68,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
             throw new InvalidOperationException(ex.Message);
         }
     }
-    
+
     public string GenerateRefreshToken()
     {
         var salt = new byte[32];
@@ -76,7 +76,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
         random.GetBytes(salt);
         return Convert.ToBase64String(salt);
     }
-    
+
     public static void DeleteRefreshToken(string refreshToken)
     {
         var salt = new byte[32];
@@ -84,7 +84,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
         random.GetBytes(salt);
         Convert.ToBase64String(salt);
     }
-    
+
     public static void UpdateRefreshToken(string refreshToken)
     {
         var salt = new byte[32];

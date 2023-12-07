@@ -6,7 +6,7 @@ using Twilio.Types;
 
 namespace SupportHub.Auth.Infrastructure.ServicesExternal;
 
-public class Twilio(IConfiguration configuration):ITwilio
+public class Twilio(IConfiguration configuration) : ITwilio
 {
     public async Task SendConfirmationAsync(string phone, string code)
     {

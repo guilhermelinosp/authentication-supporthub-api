@@ -50,7 +50,7 @@ public class SignUpUseCase(
             Cnpj = request.Cnpj,
             Email = request.Email,
             Password = encrypt.EncryptPassword(request.Password),
-            Code = code,
+            Code = code
         };
 
         await repository.CreateCompanyAsync(company);

@@ -14,14 +14,15 @@ public static class MessagesException
     public static string CNPJ_NAO_PODE_SER_ATUALIZADO => "The CNPJ's cannot be updated";
     public static string CNPJ_NAO_PODE_SER_BLOQUEADO => "The CNPJ's cannot be blocked";
     public static string CNPJ_NAO_PODE_SER_DESBLOQUEADO => "The CNPJ's cannot be unblocked";
-    
-    
+
+
     public static string USUARIO_BLOQUEADO => "User blocked.";
     public static string USUARIO_DESBLOQUEADO => "User unblocked.";
     public static string USUARIO_ATIVADO => "User activated.";
+
     public static string USUARIO_DESATIVADO => "User deactivated.";
     // Account
-    
+
     // Email
     public static string EMAIL_INVALIDO => "The user's email is invalid.";
     public static string EMAIL_NAO_AUTENTICADO => "The email's not authenticated";
@@ -37,7 +38,9 @@ public static class MessagesException
     public static string SENHA_NAO_CONFERE => "The user's password does not match.";
     public static string SENHA_NAO_INFORMADO => "The user's password must be entered.";
     public static string SENHA_MINIMO_OITO_CARACTERES => "The user's password must contain at least 8 characters.";
-    public static string SENHA_MAXIMO_DEZESSEIS_CARACTERES => "The user's password must contain a maximum of 16 characters.";
+
+    public static string SENHA_MAXIMO_DEZESSEIS_CARACTERES =>
+        "The user's password must contain a maximum of 16 characters.";
 
     // Phone
     public static string TELEFONE_INVALIDO => "The user's phone number must be in the format XXXXXXXXXXX";
@@ -51,14 +54,14 @@ public static class MessagesException
     public static string CODIGO_NAO_INFORMADO => "The code must be informed.";
     public static string CODIGO_EXPIRADO => "The code has expired.";
     public static string CODIGO_SEM_PERMISSAO => "You do not have permission to access this resource.";
-    
+
 
     // Token
     public static string TOKEN_INVALIDO => "The token is invalid.";
     public static string TOKEN_NAO_INFORMADO => "The token must be informed.";
     public static string TOKEN_EXPIRADO => "The token has expired.";
     public static string TOKEN_SEM_PERMISSAO => "You do not have permission to access this resource.";
-    
+
     // Others
     public static string ERRO_DESCONHECIDO => "Unknown error.";
     public static string ERRO_AO_CRIAR_USUARIO => "Error creating user.";

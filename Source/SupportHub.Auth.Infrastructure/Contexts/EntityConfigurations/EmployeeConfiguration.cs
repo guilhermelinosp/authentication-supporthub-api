@@ -4,7 +4,7 @@ using SupportHub.Auth.Domain.Entities;
 
 namespace SupportHub.Auth.Infrastructure.Contexts.EntityConfigurations;
 
-public class EmployeeConfiguration: IEntityTypeConfiguration<Employee>
+public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {

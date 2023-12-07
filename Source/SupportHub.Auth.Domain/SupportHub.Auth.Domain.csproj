@@ -7,10 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Dtos\Requests\Consumers\" />
-      <Folder Include="Dtos\Requests\Employeers\" />
-      <Folder Include="Dtos\Responses\Consumers\" />
-      <Folder Include="Dtos\Responses\Employeers\" />
+        <Folder Include="Dtos\Requests\Consumers\"/>
+        <Folder Include="Dtos\Requests\Employeers\"/>
+        <Folder Include="Dtos\Responses\Consumers\"/>
+        <Folder Include="Dtos\Responses\Employeers\"/>
     </ItemGroup>
 
     <ItemGroup>

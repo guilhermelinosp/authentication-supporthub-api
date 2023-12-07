@@ -19,7 +19,7 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
                     validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Cnpj),
                         MessagesException.CNPJ_INVALIDO));
             });
-        
+
         RuleFor(c => c.Email)
             .NotEmpty()
             .WithMessage(MessagesException.EMAIL_NAO_INFORMADO)
@@ -39,7 +39,7 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
                     validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Password),
                         MessagesException.SENHA_INVALIDA));
             });
-        
+
         RuleFor(c => c.PasswordConfirmation)
             .NotEmpty()
             .WithMessage(MessagesException.SENHA_NAO_INFORMADO)
@@ -60,5 +60,5 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
     private static partial Regex RegexCnpj();
 
     [GeneratedRegex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$")]
-    private static partial Regex RegexPassword();
+    private static partial Regex RegexPasswoed();
 }

@@ -11,7 +11,7 @@ public class ConfirmationSignInUseCase(
     ICompanyRepository repository,
     ITokenService tokenService,
     IConfiguration configuration
-    ) : IConfirmationSignInUseCase
+) : IConfirmationSignInUseCase
 {
     public async Task<ResponseSignIn> ExecuteAsync(string code)
     {
@@ -20,12 +20,12 @@ public class ConfirmationSignInUseCase(
             throw new ValidatorException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
         var account = await repository.FindCompanyByCodeAsync(code.ToUpper());
-        if (account is null) 
+        if (account is null)
             throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
 
         if (account.Code != code.ToUpper())
             throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
-        
+
         account.Code = string.Empty;
 
         await repository.UpdateCompanyAsync(account);
