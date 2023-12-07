@@ -14,11 +14,17 @@ public class BasicReturn(bool isSucess, Error error)
 
     #endregion Properties
 
-    #region Methods Statics
+    #region Statics Methods
+
+    #region Success
 
     public static BasicReturn Success() => new(true, Error.None);
 
     public static BasicReturn<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
+
+    #endregion Success
+
+    #region Failure
 
     public static BasicReturn Failure(Error error) => new(false, error);
 
@@ -27,10 +33,15 @@ public class BasicReturn(bool isSucess, Error error)
 
     public static BasicReturn<TValue> Failure<TValue>(Error error) => new(default, false, error);
 
-    public static BasicReturn<TValue> Create<TValue>(TValue? value) =>
+    public static BasicReturn<TValue> Failure<TValue>(HttpStatusCode statusCode, List<ValidationFailure> errors) =>
+        new(default, false, ReturnErrorMessage(((int)statusCode).ToString(), errors));
+
+    #endregion Failure
+
+    protected static BasicReturn<TValue> Create<TValue>(TValue? value) =>
         value is not null ? Success(value) : Failure<TValue>(Error.None);
 
-    #endregion Methods Statics
+    #endregion Statics Methods
 
     #region Private Methods
 

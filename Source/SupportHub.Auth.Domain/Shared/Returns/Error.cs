@@ -6,7 +6,8 @@ public class Error(string statusCode, string message)
 {
     #region Constructors
 
-    public Error(HttpStatusCode httpStatusCode, string message) : this(((int)httpStatusCode).ToString(), message)
+    public Error(HttpStatusCode httpStatusCode, string message) : this(
+        ((int)httpStatusCode).ToString(), message)
     {
     }
 
