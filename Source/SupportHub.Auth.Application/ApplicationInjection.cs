@@ -25,7 +25,11 @@ public static class ApplicationInjection
 
     private static void AddServices(this IServiceCollection services)
     {
-        services.AddScoped<IEncryptService, EncryptService>();
+        services.Scan(scan =>
+            scan.FromAssemblies(ApplicationAssembly.Assembly)
+                .AddClasses(classes => classes.AssignableTo<IServiceBase>()).AsImplementedInterfaces()
+                .WithScopedLifetime());
+
         services.AddSingleton<ITokenService, TokenService>();
     }
 
@@ -35,12 +39,5 @@ public static class ApplicationInjection
             scan.FromAssemblies(ApplicationAssembly.Assembly)
                 .AddClasses(classes => classes.AssignableTo<IUseCaseBase>()).AsImplementedInterfaces()
                 .WithScopedLifetime());
-
-        services.AddScoped<ISignInUseCase, SignInUseCase>();
-        services.AddScoped<ISignUpUseCase, SignUpUseCase>();
-        services.AddScoped<IConfirmationSignUpUseCase, ConfirmationSignUpUseCase>();
-        services.AddScoped<IConfirmationSignInUseCase, ConfirmationSignInUseCase>();
-        services.AddScoped<IForgotPasswordUseCase, ForgotPasswordUseCase>();
-        services.AddScoped<IResetPasswordUseCase, ResetPasswordUseCase>();
     }
 }

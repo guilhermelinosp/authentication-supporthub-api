@@ -1,4 +1,4 @@
-﻿using SupportHub.Auth.Domain.Entities;
+﻿using SupportHub.Auth.Application.Abstract;
 
 namespace SupportHub.Auth.Application.Services.Tokenization;
 
