@@ -1,5 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - auth-support-hub-api
-
+name: Build and Deploy
 on:
   push:
     branches:
