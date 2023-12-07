@@ -24,28 +24,27 @@ public class CompanyController(
     IForgotPasswordUseCase forgotPassword,
     IResetPasswordUseCase resetPassword) : Controller
 {
-    
     [HttpPost("signup")]
     public async Task<IActionResult> SignUpRequest([FromBody] RequestSignUp request)
     {
         await signUp.ExecuteAsync(request);
         return Ok(new { message = "sending the code to your email." });
     }
-    
+
     [HttpPost("signup/{otp}")]
     public async Task<IActionResult> SignUpConfirmationRequest([FromRoute] string otp)
     {
         await confirmationSignUp.ExecuteAsync(otp);
         return Ok(new { message = "confirmed successfully." });
     }
-    
+
     [HttpPost("signin")]
     public async Task<IActionResult> SignInEmailRequest([FromBody] RequestSignInEmail request)
     {
         await signIn.ExecuteAsync(request);
         return Ok(new { message = "sending the code to your email or phone." });
     }
-    
+
     [ProducesResponseType(typeof(ResponseSignIn), StatusCodes.Status200OK)]
     [HttpPost("signin/{otp}")]
     public async Task<IActionResult> SignInEmailConfirmationRequest([FromRoute] string otp)
@@ -53,16 +52,17 @@ public class CompanyController(
         var response = await confirmationSignIn.ExecuteAsync(otp);
         return Ok(response);
     }
-    
+
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPasswordRequest([FromBody] RequestForgotPassword request)
     {
         await forgotPassword.ExecuteAsync(request);
         return Ok(new { message = "sending the code to your email or phone." });
     }
-    
+
     [HttpPost("reset-password/{otp}")]
-    public async Task<IActionResult> ResetPasswordRequest([FromBody] RequestResetPassword request, [FromRoute] string otp)
+    public async Task<IActionResult> ResetPasswordRequest([FromBody] RequestResetPassword request,
+        [FromRoute] string otp)
     {
         await resetPassword.ExecuteAsync(request, otp);
         return Ok(new { message = "confirmed successfully." });

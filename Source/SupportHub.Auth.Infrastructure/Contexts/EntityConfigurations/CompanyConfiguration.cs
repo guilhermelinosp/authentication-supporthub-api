@@ -4,7 +4,7 @@ using SupportHub.Auth.Domain.Entities;
 
 namespace SupportHub.Auth.Infrastructure.Contexts.EntityConfigurations;
 
-public class CompanyConfiguration: IEntityTypeConfiguration<Company>
+public class CompanyConfiguration : IEntityTypeConfiguration<Company>
 {
     public void Configure(EntityTypeBuilder<Company> builder)
     {

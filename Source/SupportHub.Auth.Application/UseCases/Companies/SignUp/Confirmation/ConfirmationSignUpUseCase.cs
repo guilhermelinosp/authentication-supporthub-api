@@ -12,9 +12,9 @@ public class ConfirmationSignUpUseCase(ICompanyRepository repository) : IConfirm
             throw new ValidatorException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
         var account = await repository.FindCompanyByCodeAsync(code.ToUpper());
-        if (account is null) 
+        if (account is null)
             throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
-        
+
         if (account.IsVerified)
             throw new CompanyException(new List<string> { MessagesException.EMAIL_JA_VERIFICADO });
 
@@ -22,7 +22,7 @@ public class ConfirmationSignUpUseCase(ICompanyRepository repository) : IConfirm
             throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
 
         account.IsVerified = true;
-        
+
         account.Code = string.Empty;
 
         await repository.UpdateCompanyAsync(account);

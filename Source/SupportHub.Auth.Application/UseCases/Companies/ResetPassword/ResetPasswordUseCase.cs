@@ -17,10 +17,10 @@ public class ResetPasswordUseCase(ICompanyRepository repository, IEncryptService
         var account = await repository.FindCompanyByCodeAsync(code);
         if (account is null)
             throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
-        
+
         if (request.Password != request.PasswordConfirmation)
             throw new CompanyException(new List<string> { MessagesException.SENHA_NAO_CONFERE });
-        
+
         account.Password = encrypt.EncryptPassword(request.Password!);
 
         account.Code = string.Empty;

@@ -1,6 +1,4 @@
-﻿using SupportHub.Auth.Domain.Entities;
-
-namespace SupportHub.Auth.Application.Services.Tokenization;
+﻿namespace SupportHub.Auth.Application.Services.Tokenization;
 
 public interface ITokenService
 {
