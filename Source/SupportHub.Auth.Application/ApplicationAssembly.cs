@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace SupportHub.Auth.Domain;
+namespace SupportHub.Auth.Application;
 
 public static class ApplicationAssembly
 {

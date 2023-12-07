@@ -16,20 +16,19 @@ namespace SupportHub.Auth.Application;
 
 public static class ApplicationInjection
 {
-    public static void AddApplicationInjection(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplicationInjection(this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddServices();
         services.AddUseCases();
         services.AddInfrastructureInjection(configuration);
+
+        return services;
     }
 
     private static void AddServices(this IServiceCollection services)
     {
-        services.Scan(scan =>
-            scan.FromAssemblies(ApplicationAssembly.Assembly)
-                .AddClasses(classes => classes.AssignableTo<IServiceBase>()).AsImplementedInterfaces()
-                .WithScopedLifetime());
-
+        services.AddScoped<IEncryptService, EncryptService>();
         services.AddSingleton<ITokenService, TokenService>();
     }
 

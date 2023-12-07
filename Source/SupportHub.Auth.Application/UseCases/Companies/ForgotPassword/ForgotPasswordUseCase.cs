@@ -3,6 +3,7 @@ using SupportHub.Auth.Domain.Dtos.Requests.Companies;
 using SupportHub.Auth.Domain.Exceptions;
 using SupportHub.Auth.Domain.Repositories;
 using SupportHub.Auth.Domain.ServicesExternal;
+using SupportHub.Auth.Domain.Shared.Returns;
 
 namespace SupportHub.Auth.Application.UseCases.Companies.ForgotPassword;
 

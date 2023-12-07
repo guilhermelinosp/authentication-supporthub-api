@@ -1,6 +1,9 @@
-﻿namespace SupportHub.Auth.Domain.Apis;
+﻿using SupportHub.Auth.Domain.Dtos.Responses.Apis.Brasil;
+using SupportHub.Auth.Domain.Shared.Returns;
+
+namespace SupportHub.Auth.Domain.Apis;
 
 public interface IBrasilApi
 {
-    Task ConsultaCnpj(string cnpj);
+    Task<BasicReturn<ResponseCnpj>> ConsultaCnpj(string cnpj);
 }

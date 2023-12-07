@@ -6,9 +6,9 @@ using SupportHub.Auth.Domain.Exceptions;
 
 namespace SupportHub.Auth.API.Filters;
 
-public class ValidationFilter: IExceptionFilter
+public class ValidationFilter : IExceptionFilter
 {
-public void OnException(ExceptionContext context)
+    public void OnException(ExceptionContext context)
     {
         if (context.Exception is BaseException)
             HandleException(context);
@@ -53,9 +53,10 @@ public void OnException(ExceptionContext context)
     {
         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         Console.WriteLine(context.Exception);
-        context.Result = new ObjectResult(new ResponseException(new List<string> { MessagesException.ERRO_DESCONHECIDO }));
+        context.Result =
+            new ObjectResult(new ResponseException(new List<string> { MessagesException.ERRO_DESCONHECIDO }));
     }
-    
+
     private static void HandleTokenException(ExceptionContext context)
     {
         var exception = context.Exception as TokenException;

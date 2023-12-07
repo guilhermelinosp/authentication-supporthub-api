@@ -2,7 +2,7 @@
 
 namespace SupportHub.Auth.Domain.Dtos.Responses.Apis.Brasil;
 
-public class ResponseCNPJ
+public class ResponseCnpj
 {
     public string Cnpj { get; set; } = string.Empty;
 

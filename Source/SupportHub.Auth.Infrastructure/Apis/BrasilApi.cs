@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using SupportHub.Auth.Domain.Apis;
 using SupportHub.Auth.Domain.Dtos.Responses.Apis.Brasil;
+using SupportHub.Auth.Domain.Shared.Returns;
 
 namespace SupportHub.Auth.Infrastructure.Apis;
 
 public class BrasilApi(HttpClient httpClient) : IBrasilApi
 {
-    public async Task ConsultaCnpj(string cnpj)
+    public async Task<BasicReturn<ResponseCnpj>> ConsultaCnpj(string cnpj)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"v1/{cnpj}");
 
@@ -15,7 +16,11 @@ public class BrasilApi(HttpClient httpClient) : IBrasilApi
 
         if (response.IsSuccessStatusCode)
         {
-            ResponseCNPJ? responseCnpj = JsonConvert.DeserializeObject<ResponseCNPJ>(cnpjReturn);
+            ResponseCnpj? responseCnpj = JsonConvert.DeserializeObject<ResponseCnpj>(cnpjReturn);
+            return responseCnpj;
         }
+
+        var error = JsonConvert.DeserializeObject<ErrorResponse>(cnpjReturn);
+        return BasicReturn.Failure<ResponseCnpj>(new(response.StatusCode, error!.Message));
     }
 }
