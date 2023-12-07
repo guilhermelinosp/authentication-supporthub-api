@@ -13,10 +13,7 @@ var services = builder.Services;
 services.AddScoped<ValidationFilter>();
 services.AddApplicationInjection(configuration);
 services.AddEndpointsApiExplorer();
-services.AddControllers(options =>
-{
-    options.Filters.AddService<ValidationFilter>();
-});
+services.AddControllers(options => { options.Filters.AddService<ValidationFilter>(); });
 
 services.AddSwaggerGen();
 

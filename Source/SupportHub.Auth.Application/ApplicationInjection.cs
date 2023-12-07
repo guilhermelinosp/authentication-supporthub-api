@@ -9,6 +9,7 @@ using SupportHub.Auth.Application.UseCases.Companies.SignIn;
 using SupportHub.Auth.Application.UseCases.Companies.SignUp;
 using SupportHub.Auth.Application.UseCases.Companies.SignIn.Confirmation;
 using SupportHub.Auth.Application.UseCases.Companies.SignUp.Confirmation;
+using SupportHub.Auth.Domain;
 using SupportHub.Auth.Infrastructure;
 
 namespace SupportHub.Auth.Application;
@@ -21,15 +22,20 @@ public static class ApplicationInjection
         services.AddUseCases();
         services.AddInfrastructureInjection(configuration);
     }
-    
+
     private static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<IEncryptService, EncryptService>();
         services.AddSingleton<ITokenService, TokenService>();
     }
-    
+
     private static void AddUseCases(this IServiceCollection services)
     {
+        services.Scan(scan =>
+            scan.FromAssemblies(ApplicationAssembly.Assembly)
+                .AddClasses(classes => classes.AssignableTo<IUseCaseBase>()).AsImplementedInterfaces()
+                .WithScopedLifetime());
+
         services.AddScoped<ISignInUseCase, SignInUseCase>();
         services.AddScoped<ISignUpUseCase, SignUpUseCase>();
         services.AddScoped<IConfirmationSignUpUseCase, ConfirmationSignUpUseCase>();
@@ -37,5 +43,4 @@ public static class ApplicationInjection
         services.AddScoped<IForgotPasswordUseCase, ForgotPasswordUseCase>();
         services.AddScoped<IResetPasswordUseCase, ResetPasswordUseCase>();
     }
-    
 }

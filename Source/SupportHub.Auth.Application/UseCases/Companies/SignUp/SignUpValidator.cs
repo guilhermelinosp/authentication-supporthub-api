@@ -35,7 +35,7 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
             .WithMessage(MessagesException.SENHA_MAXIMO_DEZESSEIS_CARACTERES)
             .Custom((password, validator) =>
             {
-                if (!RegexPasswoed().IsMatch(password))
+                if (!RegexPassword().IsMatch(password))
                     validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Password),
                         MessagesException.SENHA_INVALIDA));
             });
@@ -49,7 +49,7 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
             .WithMessage(MessagesException.SENHA_MAXIMO_DEZESSEIS_CARACTERES)
             .Custom((password, validator) =>
             {
-                if (!RegexPasswoed().IsMatch(password))
+                if (!RegexPassword().IsMatch(password))
                     validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Password),
                         MessagesException.SENHA_INVALIDA));
             });
@@ -59,8 +59,6 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
     [GeneratedRegex(@"^\d{14}$")]
     private static partial Regex RegexCnpj();
 
-
     [GeneratedRegex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$")]
-    private static partial Regex RegexPasswoed();
-    
+    private static partial Regex RegexPassword();
 }

@@ -25,7 +25,7 @@ public class Twilio(IConfiguration configuration):ITwilio
 
         await MessageResource.CreateAsync(new CreateMessageOptions(new PhoneNumber(phone))
         {
-            From = configuration["Twilio:PhoneNumber"],
+            From = configuration["Twilio:FromNumber"],
             Body = $"Your security code for Test API: {code}"
         });
     }
