@@ -60,5 +60,5 @@ public partial class SignUpValidator : AbstractValidator<RequestSignUp>
     private static partial Regex RegexCnpj();
 
     [GeneratedRegex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$")]
-    private static partial Regex RegexPasswoed();
+    private static partial Regex RegexPassword();
 }
