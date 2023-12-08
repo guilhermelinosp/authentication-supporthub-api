@@ -9,9 +9,8 @@ namespace SupportHub.Auth.API.Controllers;
 public class CustomerController : BaseController
 {
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseBase<string>))]
     public async Task<ActionResult> Teste()
     {
-        return ResponseBase(HttpStatusCode.OK, BasicReturn.Failure(new("400", "Deu Ruim")), "Deu Certo");
+        return ResponseBase(HttpStatusCode.OK, BasicReturn.Success(), "");
     }
 }

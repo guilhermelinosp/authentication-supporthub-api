@@ -5,9 +5,10 @@ using SupportHub.Auth.Domain.Shared.Returns;
 namespace SupportHub.Auth.API.Controllers.Abstract;
 
 [ApiController]
-[ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ResponseBase<string>))]
 public abstract class BaseController : Controller
 {
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ResponseBase<string>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     protected ActionResult ResponseBase(HttpStatusCode statusCode, BasicReturn basicReturn, string responseMessage,
         HttpStatusCode statusCodeError = HttpStatusCode.NotFound)
     {
@@ -18,5 +19,19 @@ public abstract class BaseController : Controller
         }
 
         return StatusCode((int)statusCode, new ResponseBase<string>(responseMessage));
+    }
+
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ResponseBase<string>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    protected ActionResult ResponseBase<T>(HttpStatusCode statusCode, BasicReturn<T> basicReturn,
+        HttpStatusCode statusCodeError = HttpStatusCode.NotFound)
+    {
+        if (basicReturn.IsFailure)
+        {
+            basicReturn.Error.StatusCode = ((int)statusCodeError).ToString();
+            return StatusCode((int)statusCodeError, new ResponseBase<string>(basicReturn.Error));
+        }
+
+        return StatusCode((int)statusCode, new ResponseBase<T>(basicReturn.Value));
     }
 }
