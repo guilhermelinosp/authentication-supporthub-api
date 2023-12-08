@@ -9,17 +9,21 @@ using SupportHub.Auth.Application.UseCases.Companies.SignIn;
 using SupportHub.Auth.Application.UseCases.Companies.SignIn.Confirmation;
 using SupportHub.Auth.Application.UseCases.Companies.SignUp;
 using SupportHub.Auth.Application.UseCases.Companies.SignUp.Confirmation;
+using SupportHub.Auth.Domain;
 using SupportHub.Auth.Infrastructure;
 
 namespace SupportHub.Auth.Application;
 
 public static class ApplicationInjection
 {
-    public static void AddApplicationInjection(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplicationInjection(this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddServices();
         services.AddUseCases();
         services.AddInfrastructureInjection(configuration);
+
+        return services;
     }
 
     private static void AddServices(this IServiceCollection services)
@@ -30,12 +34,9 @@ public static class ApplicationInjection
 
     private static void AddUseCases(this IServiceCollection services)
     {
-
-        services.AddScoped<ISignInUseCase, SignInUseCase>();
-        services.AddScoped<ISignUpUseCase, SignUpUseCase>();
-        services.AddScoped<IConfirmationSignUpUseCase, ConfirmationSignUpUseCase>();
-        services.AddScoped<IConfirmationSignInUseCase, ConfirmationSignInUseCase>();
-        services.AddScoped<IForgotPasswordUseCase, ForgotPasswordUseCase>();
-        services.AddScoped<IResetPasswordUseCase, ResetPasswordUseCase>();
+        services.Scan(scan =>
+            scan.FromAssemblies(ApplicationAssembly.Assembly)
+                .AddClasses(classes => classes.AssignableTo<IUseCaseBase>()).AsImplementedInterfaces()
+                .WithScopedLifetime());
     }
 }

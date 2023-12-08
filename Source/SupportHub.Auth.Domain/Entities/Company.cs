@@ -7,7 +7,6 @@ namespace SupportHub.Auth.Domain.Entities;
 public class Company
 {
     [Key] public Guid CompanyId { get; set; } = Guid.NewGuid();
-
     public required string Cnpj { get; set; }
     public required string Email { get; set; }
     public required string Password { get; set; }

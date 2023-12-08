@@ -1,6 +1,8 @@
-﻿namespace SupportHub.Auth.Application.UseCases.Companies.SignUp.Confirmation;
+﻿using SupportHub.Auth.Application.Abstract;
 
-public interface IConfirmationSignUpUseCase
+namespace SupportHub.Auth.Application.UseCases.Companies.SignUp.Confirmation;
+
+public interface IConfirmationSignUpUseCase : IUseCaseBase
 {
     Task ExecuteAsync(string code);
 }

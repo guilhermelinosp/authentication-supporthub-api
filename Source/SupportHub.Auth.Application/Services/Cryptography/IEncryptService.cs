@@ -1,6 +1,8 @@
-﻿namespace SupportHub.Auth.Application.Services.Cryptography;
+﻿using SupportHub.Auth.Application.Abstract;
 
-public interface IEncryptService
+namespace SupportHub.Auth.Application.Services.Cryptography;
+
+public interface IEncryptService : IServiceBase
 {
     string EncryptPassword(string password);
     string EncryptCode(string code);
