@@ -1,70 +1,83 @@
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SupportHub.Auth.API.Controllers.Abstract;
 using SupportHub.Auth.Application.UseCases.Companies.ForgotPassword;
-using SupportHub.Auth.Application.UseCases.Companies.ResetPassword;
+using SupportHub.Auth.Application.UseCases.Companies.ForgotPassword.Confirmation;
 using SupportHub.Auth.Application.UseCases.Companies.SignIn;
 using SupportHub.Auth.Application.UseCases.Companies.SignIn.Confirmation;
+using SupportHub.Auth.Application.UseCases.Companies.SignOut;
 using SupportHub.Auth.Application.UseCases.Companies.SignUp;
 using SupportHub.Auth.Application.UseCases.Companies.SignUp.Confirmation;
-using SupportHub.Auth.Domain.Dtos.Requests.Companies;
-using SupportHub.Auth.Domain.Dtos.Responses.Companies;
-using SupportHub.Auth.Domain.Dtos.Responses.Exceptions;
+using SupportHub.Auth.Domain.DTOs.Requests.Companies;
+using SupportHub.Auth.Domain.DTOs.Responses;
 
 namespace SupportHub.Auth.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces("application/json")]
-[ProducesResponseType(StatusCodes.Status200OK)]
-[ProducesResponseType<ResponseException>(StatusCodes.Status400BadRequest)]
+[ProducesResponseType<BaseActionResult<ResponseException>>(StatusCodes.Status400BadRequest)]
+[ProducesResponseType<BaseActionResult<ResponseDefault>>(StatusCodes.Status200OK)]
 public class CompanyController(
     ISignUpUseCase signUp,
     IConfirmationSignUpUseCase confirmationSignUp,
     IConfirmationSignInUseCase confirmationSignIn,
     ISignInUseCase signIn,
+    ISignOutUseCase signOut,
     IForgotPasswordUseCase forgotPassword,
     IResetPasswordUseCase resetPassword) : Controller
 {
     [HttpPost("signup")]
-    public async Task<IActionResult> SignUpRequest([FromBody] RequestSignUp request)
+    public async Task<BaseActionResult<ResponseDefault>> SignUpRequest([FromBody] RequestSignUp request)
     {
-        await signUp.ExecuteAsync(request);
-        return Ok(new { message = "sending the code to your email." });
+        var response = await signUp.ExecuteAsync(request);
+        return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK,response);
     }
-
-    [HttpPost("signup/{otp}")]
-    public async Task<IActionResult> SignUpConfirmationRequest([FromRoute] string otp)
+    
+    [HttpPost("signup/{accountId}/{otp}")]
+    public async Task<BaseActionResult<ResponseDefault>> SignUpConfirmationRequest([FromRoute] string accountId,[FromRoute] string otp)
     {
-        await confirmationSignUp.ExecuteAsync(otp);
-        return Ok(new { message = "confirmed successfully." });
+        var responde = await confirmationSignUp.ExecuteAsync(accountId, otp);
+        return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, responde);
     }
 
     [HttpPost("signin")]
-    public async Task<IActionResult> SignInEmailRequest([FromBody] RequestSignInEmail request)
+    public async Task<BaseActionResult<ResponseDefault>> SignInRequest([FromBody] RequestSignIn request)
     {
-        await signIn.ExecuteAsync(request);
-        return Ok(new { message = "sending the code to your email or phone." });
+        var response = await signIn.ExecuteAsync(request);
+        return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
+    }
+    
+    [HttpPost("signin/{accountId}/{otp}")]
+    [ProducesResponseType<BaseActionResult<ResponseToken>>(StatusCodes.Status200OK)]
+    public  BaseActionResult<ResponseToken> SignInConfirmationRequest([FromRoute] string accountId,[FromRoute] string otp)
+    {
+        var response = confirmationSignIn.ExecuteAsync(accountId,otp);
+        return new BaseActionResult<ResponseToken>(HttpStatusCode.OK, response);
+    }
+    
+    
+    [HttpGet("signout")]
+    public async Task<BaseActionResult<ResponseDefault>> SignOutRequest()
+    {
+        var token = Request.Headers.Authorization.ToString().Split(" ")[1];
+        var response = await signOut.ExecuteAsync(token);
+        return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
     }
 
-    [ProducesResponseType(typeof(ResponseSignIn), StatusCodes.Status200OK)]
-    [HttpPost("signin/{otp}")]
-    public async Task<IActionResult> SignInEmailConfirmationRequest([FromRoute] string otp)
-    {
-        var response = await confirmationSignIn.ExecuteAsync(otp);
-        return Ok(response);
-    }
-
-    [HttpPost("forgot-password")]
-    public async Task<IActionResult> ForgotPasswordRequest([FromBody] RequestForgotPassword request)
-    {
-        await forgotPassword.ExecuteAsync(request);
-        return Ok(new { message = "sending the code to your email or phone." });
-    }
-
-    [HttpPost("reset-password/{otp}")]
-    public async Task<IActionResult> ResetPasswordRequest([FromBody] RequestResetPassword request,
-        [FromRoute] string otp)
-    {
-        await resetPassword.ExecuteAsync(request, otp);
-        return Ok(new { message = "confirmed successfully." });
-    }
+   [HttpPost("forgot-password")]
+   public async Task<BaseActionResult<ResponseDefault>> ForgotPasswordRequest([FromBody] RequestForgotPassword request)
+   {
+       var response = await forgotPassword.ExecuteAsync(request);
+       return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK,response);
+   }
+   
+   [HttpPost("forgot-password/{accountId}/{otp}")]
+   public async Task<BaseActionResult<ResponseDefault>> ResetPasswordRequest([FromBody] RequestResetPassword request,[FromRoute] string accountId, [FromRoute] string otp)
+   {
+       var responde = await resetPassword.ExecuteAsync(request,accountId, otp);
+       return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK,responde);
+   }
 }
+

@@ -11,7 +11,7 @@ using SupportHub.Auth.Infrastructure.Contexts;
 
 namespace SupportHub.Auth.Infrastructure.Migrations
 {
-    [DbContext(typeof(SupportHubContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20231205180638_NewMigration")]
     partial class NewMigration
     {

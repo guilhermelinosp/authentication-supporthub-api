@@ -1,8 +1,8 @@
-﻿using SupportHub.Auth.Application.Abstract;
+﻿using SupportHub.Auth.Domain.DTOs.Responses;
 
 namespace SupportHub.Auth.Application.UseCases.Companies.SignUp.Confirmation;
 
-public interface IConfirmationSignUpUseCase : IUseCaseBase
+public interface IConfirmationSignUpUseCase : IApplicationInjection
 {
-    Task ExecuteAsync(string code);
+    Task<ResponseDefault> ExecuteAsync(string accountId, string code);
 }

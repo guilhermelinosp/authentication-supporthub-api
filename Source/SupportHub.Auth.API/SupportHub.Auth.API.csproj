@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>false</InvariantGlobalization>
         <UserSecretsId>a1bb7188-9943-471d-9a93-0040ec6c5066</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,6 +22,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\SupportHub.Auth.Application\SupportHub.Auth.Application.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

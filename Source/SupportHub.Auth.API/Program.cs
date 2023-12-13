@@ -1,26 +1,31 @@
-using SupportHub.Auth.API.Configuration;
+using SupportHub.Auth.API.Configurations;
+using SupportHub.Auth.API.Filters;
 using SupportHub.Auth.Application;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var configuration = builder.Configuration;
+
 var services = builder.Services;
 
-services.AddPresentation()
-    .AddAplication()
-    .AddApplicationInjection(configuration)
-    .AddAuthentication(configuration);
+services.AddApplicationInjection(configuration);
 
-services.AddRouting(options =>
+services.AddAuthorizationConfiguration(configuration);
+services.AddAuthenticationConfiguration(configuration);
+services.AddSwaggerConfiguration(configuration);
+services.AddRoutingConfiguration(configuration);
+services.AddCorsConfiguration(configuration);
+
+services.AddScoped<ExceptionFilter>();
+services.AddControllers(options =>
 {
-    options.LowercaseUrls = true;
-    options.LowercaseQueryStrings = true;
-    options.AppendTrailingSlash = false;
+    options.Filters.AddService<ExceptionFilter>();
 });
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
     configuration.AddUserSecrets<Program>();
@@ -28,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseHttpsRedirection();
-app.UseCors("localhost");
+app.UseCors("Any");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

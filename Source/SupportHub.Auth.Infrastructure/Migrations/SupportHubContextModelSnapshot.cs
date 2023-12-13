@@ -10,7 +10,7 @@ using SupportHub.Auth.Infrastructure.Contexts;
 
 namespace SupportHub.Auth.Infrastructure.Migrations
 {
-    [DbContext(typeof(SupportHubContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class SupportHubContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

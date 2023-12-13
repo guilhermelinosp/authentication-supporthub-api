@@ -12,13 +12,10 @@ public abstract class BaseController : Controller
     protected ActionResult ResponseBase(HttpStatusCode statusCode, BasicReturn basicReturn, string responseMessage,
         HttpStatusCode statusCodeError = HttpStatusCode.NotFound)
     {
-        if (basicReturn.IsFailure)
-        {
-            basicReturn.Error.StatusCode = ((int)statusCodeError).ToString();
-            return StatusCode((int)statusCodeError, new ResponseBase<string>(basicReturn.Error));
-        }
-
-        return StatusCode((int)statusCode, new ResponseBase<string>(responseMessage));
+        if (!basicReturn.IsFailure) return StatusCode((int)statusCode, new ResponseBase<string?>(responseMessage));
+        
+        basicReturn.Error.StatusCode = ((int)statusCodeError).ToString();
+        return StatusCode((int)statusCodeError, new ResponseBase<string>(basicReturn.Error));
     }
 
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ResponseBase<string>))]
@@ -26,12 +23,9 @@ public abstract class BaseController : Controller
     protected ActionResult ResponseBase<T>(HttpStatusCode statusCode, BasicReturn<T> basicReturn,
         HttpStatusCode statusCodeError = HttpStatusCode.NotFound)
     {
-        if (basicReturn.IsFailure)
-        {
-            basicReturn.Error.StatusCode = ((int)statusCodeError).ToString();
-            return StatusCode((int)statusCodeError, new ResponseBase<string>(basicReturn.Error));
-        }
-
-        return StatusCode((int)statusCode, new ResponseBase<T>(basicReturn.Value));
+        if (!basicReturn.IsFailure) return StatusCode((int)statusCode, new ResponseBase<T?>(basicReturn.Value));
+        
+        basicReturn.Error.StatusCode = ((int)statusCodeError).ToString();
+        return StatusCode((int)statusCodeError, new ResponseBase<string>(basicReturn.Error));
     }
 }

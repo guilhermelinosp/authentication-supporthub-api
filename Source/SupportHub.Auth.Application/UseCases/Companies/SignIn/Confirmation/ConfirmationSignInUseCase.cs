@@ -1,39 +1,33 @@
 ﻿using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using SupportHub.Auth.Application.Services.Tokenization;
-using SupportHub.Auth.Domain.Dtos.Responses.Companies;
+using SupportHub.Auth.Application.UseCases.Companies.Validators;
+using SupportHub.Auth.Domain.Cache;
+using SupportHub.Auth.Domain.DTOs.Responses;
 using SupportHub.Auth.Domain.Exceptions;
 using SupportHub.Auth.Domain.Repositories;
 
 namespace SupportHub.Auth.Application.UseCases.Companies.SignIn.Confirmation;
 
 public class ConfirmationSignInUseCase(
-    ICompanyRepository repository,
-    ITokenService tokenService,
-    IConfiguration configuration
+    ITokenizationService tokenizationService,
+    IConfiguration configuration,
+    IOneTimePasswordCache oneTimePassword,
+    ISessionCache session
 ) : IConfirmationSignInUseCase
 {
-    public async Task<ResponseSignIn> ExecuteAsync(string code)
+    public  ResponseToken ExecuteAsync(string accountId, string code)
     {
-        var validatorRequest = await new ConfirmationSignInValidator().ValidateAsync(code.ToUpper());
-        if (!validatorRequest.IsValid)
-            throw new ValidatorException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
-
-        var account = await repository.FindCompanyByCodeAsync(code.ToUpper());
-        if (account is null)
-            throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
-
-        if (account.Code != code.ToUpper())
-            throw new CompanyException(new List<string> { MessagesException.CODIGO_INVALIDO });
-
-        account.Code = string.Empty;
-
-        await repository.UpdateCompanyAsync(account);
-
-        return new ResponseSignIn
+        var validatorCode = oneTimePassword.ValidateOneTimePassword(accountId, code);
+        if (!validatorCode)
+            throw new DefaultException([MessagesException.CODIGO_INVALIDO]);
+        
+        session.SetSessionAccountAsync(accountId);
+        
+        return new ResponseToken
         {
-            Token = tokenService.GenerateToken(account.CompanyId.ToString()),
-            RefreshToken = tokenService.GenerateRefreshToken(),
+            Token = tokenizationService.GenerateToken(accountId),
+            RefreshToken = tokenizationService.GenerateRefreshToken(),
             ExpiryDate =
                 DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt:Expiry"]!, CultureInfo.InvariantCulture))
         };

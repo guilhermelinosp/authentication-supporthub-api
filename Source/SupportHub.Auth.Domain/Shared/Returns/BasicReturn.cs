@@ -8,7 +8,6 @@ public class BasicReturn(bool isSucess, Error error)
     #region Properties
 
     public bool IsSuccess { get; } = isSucess;
-
     public bool IsFailure => !IsSuccess;
     public Error Error { get; } = error;
 

@@ -13,7 +13,6 @@ public class Company
     public string Phone { get; set; } = string.Empty;
     public bool IsVerified { get; set; } = false;
     public bool Is2Fa { get; set; } = false;
-    public string Code { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

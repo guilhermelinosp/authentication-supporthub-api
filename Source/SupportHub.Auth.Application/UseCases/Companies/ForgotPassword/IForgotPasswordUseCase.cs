@@ -1,9 +1,9 @@
-﻿using SupportHub.Auth.Application.Abstract;
-using SupportHub.Auth.Domain.Dtos.Requests.Companies;
+﻿using SupportHub.Auth.Domain.DTOs.Requests.Companies;
+using SupportHub.Auth.Domain.DTOs.Responses;
 
 namespace SupportHub.Auth.Application.UseCases.Companies.ForgotPassword;
 
-public interface IForgotPasswordUseCase : IUseCaseBase
+public interface IForgotPasswordUseCase : IApplicationInjection
 {
-    Task ExecuteAsync(RequestForgotPassword request);
+    Task<ResponseDefault> ExecuteAsync(RequestForgotPassword request);
 }

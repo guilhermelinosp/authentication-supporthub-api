@@ -1,9 +1,9 @@
-﻿using SupportHub.Auth.Application.Abstract;
-using SupportHub.Auth.Domain.Dtos.Requests.Companies;
+﻿using SupportHub.Auth.Domain.DTOs.Requests.Companies;
+using SupportHub.Auth.Domain.DTOs.Responses;
 
 namespace SupportHub.Auth.Application.UseCases.Companies.SignUp;
 
-public interface ISignUpUseCase : IUseCaseBase
+public interface ISignUpUseCase : IApplicationInjection
 {
-    Task ExecuteAsync(RequestSignUp request);
+    Task<ResponseDefault> ExecuteAsync(RequestSignUp request);
 }

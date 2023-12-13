@@ -1,7 +1,10 @@
 ﻿namespace SupportHub.Auth.Domain.Exceptions;
 
-public static class MessagesException
+public record MessagesException
 {
+    public static string SESSION_ATIVA => "Session active.";
+    public static string SESSION_EXPIRADA => "Session expired.";
+    public static string CONTA_NAO_ENCONTRADA => "Account not found.";
     public static string CNPJ_INVALIDO => "The user's CNPJ is invalid.";
     public static string CNPJ_JA_REGISTRADO => "The user's CNPJ has already been registered.";
     public static string CNPJ_NAO_INFORMADO => "The user's CNPJ must be provided.";
@@ -19,13 +22,12 @@ public static class MessagesException
     public static string USUARIO_BLOQUEADO => "User blocked.";
     public static string USUARIO_DESBLOQUEADO => "User unblocked.";
     public static string USUARIO_ATIVADO => "User activated.";
-
     public static string USUARIO_DESATIVADO => "User deactivated.";
-    // Account
-
+    public static string USUARIO_NAO_AUTORIZADO => "User not authorized.";
+    
     // Email
     public static string EMAIL_INVALIDO => "The user's email is invalid.";
-    public static string EMAIL_NAO_AUTENTICADO => "The email's not authenticated";
+    public static string EMAIL_NAO_AUTENTICADO => "The email is not authenticated, new code has been verified your email.";
     public static string EMAIL_NAO_CONFIRMADO => "The user's email not confirmed";
     public static string EMAIL_NAO_INFORMADO => "The user's email must be provided.";
     public static string EMAIL_NAO_ENCONTRADO => "The user's email not found";

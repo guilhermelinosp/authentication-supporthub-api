@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Auth.Infrastruct
 		{94B268D4-1C7A-441B-8D42-67395352443F} = {94B268D4-1C7A-441B-8D42-67395352443F}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2CE2DF91-81BC-49E5-AA4B-9522DA95B1F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
