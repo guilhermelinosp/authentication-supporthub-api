@@ -26,7 +26,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: csharp
 
@@ -37,7 +37,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           languages: csharp
           paths: "."
