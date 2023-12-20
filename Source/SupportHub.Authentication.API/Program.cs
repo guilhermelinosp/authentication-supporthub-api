@@ -21,12 +21,10 @@ services.AddControllers(options => { options.Filters.AddService<ExceptionFilter>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger();
-	app.UseSwaggerUI();
-	configuration.AddUserSecrets<Program>();
-}
+if (app.Environment.IsDevelopment()) configuration.AddUserSecrets<Program>();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseRouting();
 app.UseHttpsRedirection();

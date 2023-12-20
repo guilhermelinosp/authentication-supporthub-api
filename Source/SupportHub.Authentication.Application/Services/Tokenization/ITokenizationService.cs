@@ -2,7 +2,7 @@
 
 public interface ITokenizationService : IApplicationInjection
 {
-    string GenerateToken(string id);
-    string GenerateRefreshToken();
-    Guid ValidateToken(string token);
+	string GenerateToken(string id);
+	string GenerateRefreshToken();
+	Guid ValidateToken(string token);
 }

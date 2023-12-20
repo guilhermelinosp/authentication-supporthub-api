@@ -5,5 +5,5 @@ namespace SupportHub.Authentication.Application.UseCases.Companies.ForgotPasswor
 
 public interface IResetPasswordUseCase : IApplicationInjection
 {
-    Task<ResponseDefault> ExecuteAsync(RequestResetPassword request,string accountId, string code);
+	Task<ResponseDefault> ExecuteAsync(RequestResetPassword request, string accountId, string code);
 }

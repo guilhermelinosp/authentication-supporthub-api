@@ -4,5 +4,5 @@ namespace SupportHub.Authentication.Application.UseCases.Companies.SignIn.Confir
 
 public interface IConfirmationSignInUseCase : IApplicationInjection
 {
-    ResponseToken ExecuteAsync(string accountId, string code);
+	ResponseToken ExecuteAsync(string accountId, string code);
 }

@@ -15,7 +15,7 @@ using SupportHub.Authentication.Application.UseCases.Companies.SignUp.Confirmati
 namespace SupportHub.Authentication.API.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/auth/[controller]")]
 [Produces("application/json")]
 [ProducesResponseType<BaseActionResult<ResponseException>>(StatusCodes.Status400BadRequest)]
 [ProducesResponseType<BaseActionResult<ResponseDefault>>(StatusCodes.Status200OK)]

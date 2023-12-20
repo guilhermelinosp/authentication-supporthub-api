@@ -5,5 +5,5 @@ namespace SupportHub.Authentication.Application.UseCases.Companies.SignUp;
 
 public interface ISignUpUseCase : IApplicationInjection
 {
-    Task<ResponseDefault> ExecuteAsync(RequestSignUp request);
+	Task<ResponseDefault> ExecuteAsync(RequestSignUp request);
 }

@@ -5,5 +5,5 @@ namespace SupportHub.Authentication.Application.UseCases.Companies.ForgotPasswor
 
 public interface IForgotPasswordUseCase : IApplicationInjection
 {
-    Task<ResponseDefault> ExecuteAsync(RequestForgotPassword request);
+	Task<ResponseDefault> ExecuteAsync(RequestForgotPassword request);
 }
