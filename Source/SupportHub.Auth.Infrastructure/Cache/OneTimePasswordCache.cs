@@ -15,7 +15,7 @@ namespace SupportHub.Auth.Infrastructure.Cache
 			var otpObject = new Otp { Code = otp };
 			var otpJson = JsonConvert.SerializeObject(otpObject);
 			
-			redisDb.StringSet(accountId, otpJson, TimeSpan.FromMinutes(5));
+			redisDb.StringSet($"OTP-{accountId}", otpJson, TimeSpan.FromMinutes(5));
 
 			return otp;
 		}
@@ -23,7 +23,7 @@ namespace SupportHub.Auth.Infrastructure.Cache
 		public bool ValidateOneTimePassword(string accountId, string otpCode)
 		{
 			var redisDb = redisConnection.GetDatabase();
-			var storedOtpJson = redisDb.StringGet(accountId);
+			var storedOtpJson = redisDb.StringGet($"OTP-{accountId}");
 
 			if (!string.IsNullOrEmpty(storedOtpJson))
 			{
