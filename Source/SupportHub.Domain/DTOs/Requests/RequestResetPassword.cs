@@ -1,4 +1,4 @@
-﻿namespace SupportHub.Domain.DTOs.Requests.Companies;
+﻿namespace SupportHub.Domain.DTOs.Requests;
 
 public class RequestResetPassword
 {

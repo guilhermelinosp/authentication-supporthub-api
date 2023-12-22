@@ -4,7 +4,7 @@ using SupportHub.Application.Services.Cryptography;
 using SupportHub.Application.Services.Tokenization;
 using SupportHub.Application.UseCases.Employees.Validators;
 using SupportHub.Domain.Cache;
-using SupportHub.Domain.DTOs.Requests.Companies;
+using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
@@ -13,7 +13,7 @@ using SupportHub.Domain.Services;
 namespace SupportHub.Application.UseCases.Employees.SignIn;
 
 public class SignInUseCase(
-	ICustomerRepository repository,
+	IEmployeeRepository repository,
 	ICryptographyService cryptographyService,
 	ITokenizationService tokenizationService,
 	ISessionCache sessionCache,
@@ -26,7 +26,7 @@ public class SignInUseCase(
 		if (!validator.IsValid)
 			throw new DefaultException(validator.Errors.Select(er => er.ErrorMessage).ToList());
 
-		var account = await repository.FindCustomerByEmailAsync(request.Email);
+		var account = await repository.FindEmployeeByEmailAsync(request.Email);
 		if (account is null)
 			throw new DefaultException([MessagesException.EMAIL_NAO_ENCONTRADO]);
 
@@ -37,11 +37,11 @@ public class SignInUseCase(
 		if (session)
 			throw new DefaultException([MessagesException.SESSION_ATIVA]);
 
-		sessionCache.SetSessionAccountAsync(account.CustomerId.ToString());
+		sessionCache.SetSessionAccountAsync(account.EmployeeId.ToString());
 
 		return new ResponseToken
 		{
-			Token = tokenizationService.GenerateToken(account.CustomerId.ToString()),
+			Token = tokenizationService.GenerateToken(account.EmployeeId.ToString()),
 			RefreshToken = tokenizationService.GenerateRefreshToken(),
 			ExpiryDate =
 				DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt_Expiry"]!, CultureInfo.InvariantCulture))

@@ -1,7 +1,7 @@
 ﻿using SupportHub.Application.Services.Cryptography;
 using SupportHub.Domain.APIs;
 using SupportHub.Domain.Cache;
-using SupportHub.Domain.DTOs.Requests.Companies;
+using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Entities;
 using SupportHub.Domain.Exceptions;

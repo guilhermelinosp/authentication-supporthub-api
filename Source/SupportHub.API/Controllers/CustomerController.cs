@@ -5,7 +5,7 @@ using SupportHub.Application.UseCases.Customers.ForgotPassword;
 using SupportHub.Application.UseCases.Customers.ForgotPassword.Confirmation;
 using SupportHub.Application.UseCases.Customers.SignIn;
 using SupportHub.Application.UseCases.Customers.SignOut;
-using SupportHub.Domain.DTOs.Requests.Companies;
+using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 
 namespace SupportHub.API.Controllers;

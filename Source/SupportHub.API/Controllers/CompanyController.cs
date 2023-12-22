@@ -8,7 +8,7 @@ using SupportHub.Application.UseCases.Companies.SignIn.Confirmation;
 using SupportHub.Application.UseCases.Companies.SignOut;
 using SupportHub.Application.UseCases.Companies.SignUp;
 using SupportHub.Application.UseCases.Companies.SignUp.Confirmation;
-using SupportHub.Domain.DTOs.Requests.Companies;
+using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 
 

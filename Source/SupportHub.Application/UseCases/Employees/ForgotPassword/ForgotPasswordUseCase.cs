@@ -1,6 +1,6 @@
 ﻿using SupportHub.Application.UseCases.Companies.Validators;
 using SupportHub.Domain.Cache;
-using SupportHub.Domain.DTOs.Requests.Companies;
+using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
@@ -9,7 +9,7 @@ using SupportHub.Domain.Services;
 namespace SupportHub.Application.UseCases.Employees.ForgotPassword;
 
 public class ForgotPasswordUseCase(
-	ICompanyRepository repository,
+	IEmployeeRepository repository,
 	ISendGridService sendGridService,
 	IOneTimePasswordCache oneTimePassword)
 	: IForgotPasswordUseCase
@@ -20,7 +20,7 @@ public class ForgotPasswordUseCase(
 		if (!validatorRequest.IsValid)
 			throw new DefaultException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
-		var account = await repository.FindCompanyByEmailAsync(request.Email);
+		var account = await repository.FindEmployeeByEmailAsync(request.Email);
 		if (account is null)
 			throw new DefaultException([MessagesException.EMAIL_NAO_ENCONTRADO]);
 

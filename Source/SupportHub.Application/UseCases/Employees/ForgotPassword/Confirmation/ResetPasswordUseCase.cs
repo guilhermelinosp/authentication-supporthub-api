@@ -1,6 +1,6 @@
 ﻿using SupportHub.Application.Services.Cryptography;
 using SupportHub.Domain.Cache;
-using SupportHub.Domain.DTOs.Requests.Companies;
+using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
@@ -9,7 +9,7 @@ using ResetPasswordValidator = SupportHub.Application.UseCases.Employees.Validat
 namespace SupportHub.Application.UseCases.Employees.ForgotPassword.Confirmation;
 
 public class ResetPasswordUseCase(
-	ICustomerRepository repository,
+	IEmployeeRepository repository,
 	ICryptographyService cryptography,
 	IOneTimePasswordCache oneTimePassword)
 	: Companies.ForgotPassword.Confirmation.IResetPasswordUseCase
@@ -24,7 +24,7 @@ public class ResetPasswordUseCase(
 		if (!validatorCode)
 			throw new DefaultException([MessagesException.CODIGO_INVALIDO]);
 
-		var account = await repository.FindCustomerByIdAsync(Guid.Parse(accountId));
+		var account = await repository.FindEmployeeByIdAsync(Guid.Parse(accountId));
 		if (account is null)
 			throw new DefaultException([MessagesException.CONTA_NAO_ENCONTRADA]);
 
@@ -33,7 +33,7 @@ public class ResetPasswordUseCase(
 
 		account.Password = cryptography.EncryptPassword(request.Password!);
 
-		await repository.UpdateCustomerAsync(account);
+		await repository.UpdateEmployeeAsync(account);
 
 		return new ResponseDefault(accountId, MessagesResponse.SENHA_RESETADA);
 	}
