@@ -21,26 +21,20 @@ services.AddControllers(options => { options.Filters.AddService<ExceptionFilter>
 
 var app = builder.Build();
 
+
 if (app.Environment.IsDevelopment())
 {
-	configuration
-		.SetBasePath(Directory.GetCurrentDirectory())
-		.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
-		.AddEnvironmentVariables();
-
 	app.UseDeveloperExceptionPage();
+	configuration.AddUserSecrets<Program>();
 }
-else
-{
-	configuration
-		.SetBasePath(Directory.GetCurrentDirectory())
-		.AddJsonFile("appsettings.Production.json", optional: true, reloadOnChange: true)
-		.AddEnvironmentVariables();
 
-	app.UseExceptionHandler("/error");
+if (app.Environment.IsProduction())
+{
+	app.UseHsts();
 }
 
 app.UseCors("Any");
+app.UseExceptionHandler("/error");
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();

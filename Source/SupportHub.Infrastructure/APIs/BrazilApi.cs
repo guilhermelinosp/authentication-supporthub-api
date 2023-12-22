@@ -10,7 +10,7 @@ public class BrazilApi(HttpClient httpClient) : IBrazilApi
 {
 	public async Task<BasicReturn<ResponseCnpj>> ConsultaCnpj(string cnpj)
 	{
-		var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"v1/{cnpj}");
+		var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"/cnpj/v1/{cnpj}");
 
 		using var response = await httpClient.SendAsync(httpRequest);
 		var cnpjReturn = await response.Content.ReadAsStringAsync();
