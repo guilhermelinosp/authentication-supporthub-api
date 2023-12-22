@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SupportHub.Auth.Infrastructure.Contexts;
+using SupportHub.Infrastructure.Contexts;
 
 #nullable disable
 
@@ -73,7 +73,7 @@ namespace SupportHub.Auth.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DisabledAt")
+                    b.Property<DateTime>("DisabledAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -83,14 +83,7 @@ namespace SupportHub.Auth.Infrastructure.Migrations
                     b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsVerified")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -99,7 +92,7 @@ namespace SupportHub.Auth.Infrastructure.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("TB_Authentication_Client");
+                    b.ToTable("TB_Authentication_Customer");
                 });
 
             modelBuilder.Entity("SupportHub.Domain.Entities.Employee", b =>
@@ -114,7 +107,7 @@ namespace SupportHub.Auth.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DisabledAt")
+                    b.Property<DateTime>("DisabledAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -124,14 +117,7 @@ namespace SupportHub.Auth.Infrastructure.Migrations
                     b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsVerified")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

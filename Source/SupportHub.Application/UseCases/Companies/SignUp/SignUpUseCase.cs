@@ -1,5 +1,4 @@
-﻿using SupportHub.Authentication.Application.Services.Cryptography;
-using SupportHub.Authentication.Application.UseCases.Companies.Validators;
+﻿using SupportHub.Application.Services.Cryptography;
 using SupportHub.Domain.APIs;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Requests.Companies;
@@ -8,8 +7,9 @@ using SupportHub.Domain.Entities;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
 using SupportHub.Domain.Services;
+using SignUpValidator = SupportHub.Application.UseCases.Employees.Validators.SignUpValidator;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.SignUp;
+namespace SupportHub.Application.UseCases.Companies.SignUp;
 
 public class SignUpUseCase(
 	ICompanyRepository repository,
@@ -33,9 +33,7 @@ public class SignUpUseCase(
 		if (validateCnpj is not null)
 			throw new DefaultException([MessagesException.CNPJ_JA_REGISTRADO]);
 
-		var returnCnpj = await brazilApi.ConsultaCnpj(request.Cnpj);
-		if (returnCnpj.IsFailure)
-			throw new DefaultException([returnCnpj.Error.Message]);
+		await brazilApi.ConsultaCnpj(request.Cnpj);
 
 		if (request.Password != request.PasswordConfirmation)
 			throw new DefaultException([MessagesException.SENHA_NAO_CONFERE]);

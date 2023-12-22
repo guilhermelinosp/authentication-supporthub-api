@@ -1,4 +1,4 @@
-﻿namespace SupportHub.Authentication.Application.Services.Cryptography;
+﻿namespace SupportHub.Application.Services.Cryptography;
 
 public interface ICryptographyService : IApplicationInjection
 {

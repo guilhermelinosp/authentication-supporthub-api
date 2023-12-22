@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SupportHub.Auth.Infrastructure;
+using SupportHub.Infrastructure;
 
-namespace SupportHub.Authentication.Application;
+namespace SupportHub.Application;
 
 public interface IApplicationInjection;
 

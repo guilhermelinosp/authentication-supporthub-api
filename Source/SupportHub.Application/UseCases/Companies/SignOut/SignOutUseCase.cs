@@ -1,8 +1,8 @@
-﻿using SupportHub.Authentication.Application.Services.Tokenization;
+﻿using SupportHub.Application.Services.Tokenization;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Responses;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.SignOut;
+namespace SupportHub.Application.UseCases.Companies.SignOut;
 
 public class SignOutUseCase(
 	ISessionCache sessionCache,

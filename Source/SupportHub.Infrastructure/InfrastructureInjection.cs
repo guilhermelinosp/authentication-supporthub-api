@@ -7,13 +7,13 @@ using SupportHub.Domain.APIs;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.Repositories;
 using SupportHub.Domain.Services;
-using SupportHub.Auth.Infrastructure.APIs;
-using SupportHub.Auth.Infrastructure.Cache;
-using SupportHub.Auth.Infrastructure.Contexts;
-using SupportHub.Auth.Infrastructure.Repositories;
-using SupportHub.Auth.Infrastructure.Services;
+using SupportHub.Infrastructure.APIs;
+using SupportHub.Infrastructure.Cache;
+using SupportHub.Infrastructure.Contexts;
+using SupportHub.Infrastructure.Repositories;
+using SupportHub.Infrastructure.Services;
 
-namespace SupportHub.Auth.Infrastructure;
+namespace SupportHub.Infrastructure;
 
 public interface IInfrastructureInjection;
 
@@ -50,7 +50,11 @@ public static class InfrastructureInjection
 	private static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddDbContext<ApplicationDbContext>(options =>
-			options.UseSqlServer(configuration["SqlServer_ConnectionString"]));
+			options.UseSqlServer(configuration["SqlServer_ConnectionString"], sqlOptions =>
+			{
+				sqlOptions.MigrationsAssembly("SupportHub.Infrastructure");
+				sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
+			}));
 	}
 
 	private static void AddHttpClients(this IServiceCollection services, IConfiguration configuration)

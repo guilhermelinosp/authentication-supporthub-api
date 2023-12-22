@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SupportHub.Domain.Exceptions;
 
-namespace SupportHub.Authentication.Application.Services.Tokenization;
+namespace SupportHub.Application.Services.Tokenization;
 
 public class TokenizationService(IConfiguration configuration) : ITokenizationService
 {

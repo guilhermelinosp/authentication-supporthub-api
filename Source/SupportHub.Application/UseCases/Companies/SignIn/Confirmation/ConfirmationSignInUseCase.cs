@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using Microsoft.Extensions.Configuration;
-using SupportHub.Authentication.Application.Services.Tokenization;
+using SupportHub.Application.Services.Tokenization;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Exceptions;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.SignIn.Confirmation;
+namespace SupportHub.Application.UseCases.Companies.SignIn.Confirmation;
 
 public class ConfirmationSignInUseCase(
 	ITokenizationService tokenizationService,

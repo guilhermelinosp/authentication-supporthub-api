@@ -2,29 +2,21 @@
 using SupportHub.Domain.APIs;
 using SupportHub.Domain.DTOs.Responses.APIs;
 using SupportHub.Domain.Exceptions;
-using SupportHub.Domain.Shared.Returns;
 
-namespace SupportHub.Auth.Infrastructure.APIs;
+namespace SupportHub.Infrastructure.APIs;
 
 public class BrazilApi(HttpClient httpClient) : IBrazilApi
 {
-	public async Task<BasicReturn<ResponseCnpj>> ConsultaCnpj(string cnpj)
+	public async Task ConsultaCnpj(string cnpj)
 	{
-		var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"/cnpj/v1/{cnpj}");
+		var request = new HttpRequestMessage(HttpMethod.Get, $"/cnpj/v1/{cnpj}");
 
-		using var response = await httpClient.SendAsync(httpRequest);
+		using var response = await httpClient.SendAsync(request);
 		var cnpjReturn = await response.Content.ReadAsStringAsync();
 
-		if (response.IsSuccessStatusCode)
+		if (!response.IsSuccessStatusCode)
 		{
-			var responseCnpj = JsonConvert.DeserializeObject<ResponseCnpj>(cnpjReturn);
-			return responseCnpj;
+			throw new DefaultException([JsonConvert.DeserializeObject<ErrorResponse>(cnpjReturn)?.Message!]);
 		}
-
-
-		var error = JsonConvert.DeserializeObject<ErrorResponse>(cnpjReturn);
-
-		//throw new DefaultException([error!.Message]);
-		return BasicReturn.Failure<ResponseCnpj>(new Error(response.StatusCode, error!.Message));
 	}
 }

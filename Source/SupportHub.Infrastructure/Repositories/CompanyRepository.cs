@@ -1,30 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using SupportHub.Domain.Entities;
 using SupportHub.Domain.Repositories;
-using SupportHub.Auth.Infrastructure.Contexts;
+using SupportHub.Infrastructure.Contexts;
 
-namespace SupportHub.Auth.Infrastructure.Repositories;
+namespace SupportHub.Infrastructure.Repositories;
 
 public class CompanyRepository(ApplicationDbContext context) : ICompanyRepository
 {
 	public async Task<Company?> FindCompanyByIdAsync(Guid companyid)
 	{
-		return await context.Companies!.AsNoTracking().FirstOrDefaultAsync(u => u.CompanyId == companyid);
+		return await context.Companies!.AsNoTracking().SingleOrDefaultAsync(u => u.CompanyId == companyid);
 	}
 
 	public async Task<Company?> FindCompanyByEmailAsync(string email)
 	{
-		return await context.Companies!.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+		return await context.Companies!.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email);
 	}
 
 	public async Task<Company?> FindCompanyByPhoneAsync(string phone)
 	{
-		return await context.Companies!.AsNoTracking().FirstOrDefaultAsync(u => u.Phone == phone);
+		return await context.Companies!.AsNoTracking().SingleOrDefaultAsync(u => u.Phone == phone);
 	}
 
 	public async Task<Company?> FindCompanyByCnpjAsync(string cnpj)
 	{
-		return await context.Companies!.AsNoTracking().FirstOrDefaultAsync(u => u.Cnpj == cnpj);
+		return await context.Companies!.AsNoTracking().SingleOrDefaultAsync(u => u.Cnpj == cnpj);
 	}
 
 	public async Task CreateCompanyAsync(Company company)

@@ -3,7 +3,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using SupportHub.Domain.Services;
 
-namespace SupportHub.Auth.Infrastructure.Services;
+namespace SupportHub.Infrastructure.Services;
 
 public class SendGridServiceService(IConfiguration configuration) : ISendGridService
 {

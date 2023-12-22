@@ -1,6 +1,6 @@
 ﻿using SupportHub.Domain.DTOs.Responses;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.SignIn.Confirmation;
+namespace SupportHub.Application.UseCases.Companies.SignIn.Confirmation;
 
 public interface IConfirmationSignInUseCase : IApplicationInjection
 {
