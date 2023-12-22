@@ -17,8 +17,7 @@ services.AddRoutingConfiguration(configuration);
 services.AddCorsConfiguration(configuration);
 
 services.AddScoped<ExceptionFilter>();
-services.AddControllers();
-//options => { options.Filters.AddService<ExceptionFilter>(); }
+services.AddControllers(options => { options.Filters.AddService<ExceptionFilter>(); });
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
