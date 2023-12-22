@@ -23,11 +23,21 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+	configuration
+		.SetBasePath(Directory.GetCurrentDirectory())
+		.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+		.AddEnvironmentVariables();
+
 	app.UseDeveloperExceptionPage();
 }
 else
 {
-	configuration.AddUserSecrets<Program>();
+	configuration
+		.SetBasePath(Directory.GetCurrentDirectory())
+		.AddJsonFile("appsettings.Production.json", optional: true, reloadOnChange: true)
+		.AddEnvironmentVariables();
+
+	app.UseExceptionHandler("/error");
 }
 
 app.UseCors("Any");
