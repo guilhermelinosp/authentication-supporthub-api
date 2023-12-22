@@ -3,9 +3,10 @@
 services:
   supporthub.authentication.api:
     container_name: supporthub.authentication.api
-    image: supporthub.authentication.api:latest
     build:
       context: .
       dockerfile: Source/SupportHub.Authentication.API/Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
