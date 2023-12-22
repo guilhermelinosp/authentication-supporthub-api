@@ -21,14 +21,21 @@ services.AddControllers(options => { options.Filters.AddService<ExceptionFilter>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment()) configuration.AddUserSecrets<Program>();
+if (app.Environment.IsDevelopment())
+{
+	app.UseDeveloperExceptionPage();
+	configuration.AddUserSecrets<Program>();
+}
+else
+{
+	configuration.AddUserSecrets<Program>();
+}
 
+app.UseCors("Any");
 app.UseSwagger();
 app.UseSwaggerUI();
-
 app.UseRouting();
 app.UseHttpsRedirection();
-app.UseCors("Any");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
