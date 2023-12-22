@@ -27,7 +27,7 @@ public class ConfirmationSignInUseCase(
 			Token = tokenizationService.GenerateToken(accountId),
 			RefreshToken = tokenizationService.GenerateRefreshToken(),
 			ExpiryDate =
-				DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt:Expiry"]!, CultureInfo.InvariantCulture))
+				DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt_Expiry"]!, CultureInfo.InvariantCulture))
 		};
 	}
 }

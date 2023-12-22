@@ -9,12 +9,12 @@ public class SignOutUseCase(
 	ITokenizationService tokenizationService
 ) : ISignOutUseCase
 {
-	public async Task<ResponseDefault> ExecuteAsync(string token)
+	public Task<ResponseDefault> ExecuteAsync(string token)
 	{
 		var accountId = tokenizationService.ValidateToken(token);
 
 		sessionCache.OutSessionAccountAsync(accountId.ToString());
 
-		return new ResponseDefault(accountId.ToString(), MessagesResponse.SIGN_OUT_CONFIRMADO);
+		return Task.FromResult(new ResponseDefault(accountId.ToString(), MessagesResponse.SIGN_OUT_CONFIRMADO));
 	}
 }

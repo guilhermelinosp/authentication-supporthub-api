@@ -12,27 +12,6 @@ public class CryptographyService : ICryptographyService
 		return $"{salt}.{hash}";
 	}
 
-	public string EncryptCode(string code)
-	{
-		var salt = GenerateSalt();
-		var hash = GenerateHash(code, salt);
-		return $"{salt}.{hash}";
-	}
-
-	public string EncryptEmail(string email)
-	{
-		var salt = GenerateSalt();
-		var hash = GenerateHash(email, salt);
-		return $"{salt}.{hash}";
-	}
-
-	public string EncryptPhone(string phone)
-	{
-		var salt = GenerateSalt();
-		var hash = GenerateHash(phone, salt);
-		return $"{salt}.{hash}";
-	}
-
 	public bool VerifyPassword(string password, string hashedPassword)
 	{
 		var parts = hashedPassword.Split('.', 2);
