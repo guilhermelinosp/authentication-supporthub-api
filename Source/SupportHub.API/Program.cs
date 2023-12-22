@@ -28,15 +28,9 @@ if (app.Environment.IsDevelopment())
 	configuration.AddUserSecrets<Program>();
 }
 
-if (app.Environment.IsProduction())
-{
-	app.UseHsts();
-}
-
-app.UseCors("Any");
-app.UseExceptionHandler("/error");
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("Any");
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseAuthentication();
