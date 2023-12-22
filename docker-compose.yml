@@ -1,11 +1,11 @@
 ﻿version: "3.8"
 
 services:
-  supporthub.authentication.api:
-    container_name: supporthub.authentication.api
+  authentication.supporthub.api:
+    container_name: authentication.supporthub.api
     build:
       context: .
-      dockerfile: Source/SupportHub.Authentication.API/Dockerfile
+      dockerfile: Source/SupportHub.API/Dockerfile
     ports:
       - "8080:80"
     environment:

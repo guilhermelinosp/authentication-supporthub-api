@@ -5,27 +5,27 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{ADDB513C-3C81-4BF7-8FE5-BD3E65204E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Authentication.API", "Source\SupportHub.Authentication.API\SupportHub.Authentication.API.csproj", "{9C784328-8C64-4209-8EAB-3259B74BD29F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.API", "Source\SupportHub.API\SupportHub.API.csproj", "{9C784328-8C64-4209-8EAB-3259B74BD29F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6BEC8C1-7292-411E-A055-CE817215E7E6} = {B6BEC8C1-7292-411E-A055-CE817215E7E6}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Authentication.Application", "Source\SupportHub.Authentication.Application\SupportHub.Authentication.Application.csproj", "{B6BEC8C1-7292-411E-A055-CE817215E7E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Application", "Source\SupportHub.Application\SupportHub.Application.csproj", "{B6BEC8C1-7292-411E-A055-CE817215E7E6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{94B268D4-1C7A-441B-8D42-67395352443F} = {94B268D4-1C7A-441B-8D42-67395352443F}
 		{7CA30D0A-E931-45D6-992B-0C521515AD95} = {7CA30D0A-E931-45D6-992B-0C521515AD95}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Authentication.Domain", "Source\SupportHub.Authentication.Domain\SupportHub.Authentication.Domain.csproj", "{94B268D4-1C7A-441B-8D42-67395352443F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Domain", "Source\SupportHub.Domain\SupportHub.Domain.csproj", "{94B268D4-1C7A-441B-8D42-67395352443F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Authentication.Infrastructure", "Source\SupportHub.Authentication.Infrastructure\SupportHub.Authentication.Infrastructure.csproj", "{7CA30D0A-E931-45D6-992B-0C521515AD95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Infrastructure", "Source\SupportHub.Infrastructure\SupportHub.Infrastructure.csproj", "{7CA30D0A-E931-45D6-992B-0C521515AD95}"
 	ProjectSection(ProjectDependencies) = postProject
 		{94B268D4-1C7A-441B-8D42-67395352443F} = {94B268D4-1C7A-441B-8D42-67395352443F}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2CE2DF91-81BC-49E5-AA4B-9522DA95B1F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.Authentication.UnitTest", "Tests\SupportHub.Authentication.UnitTest\SupportHub.Authentication.UnitTest.csproj", "{D1627B69-68A8-4EE6-9439-4FFE453FFB9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportHub.UnitTest", "Tests\SupportHub.UnitTest\SupportHub.UnitTest.csproj", "{D1627B69-68A8-4EE6-9439-4FFE453FFB9C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56D1FEFC-F6BC-468F-9CC2-35E4EDC75A6A}"
 	ProjectSection(SolutionItems) = preProject
