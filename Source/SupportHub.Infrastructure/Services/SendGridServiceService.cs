@@ -9,8 +9,8 @@ public class SendGridServiceService(IConfiguration configuration) : ISendGridSer
 {
 	public async Task SendSignUpAsync(string email, string code)
 	{
-		var sendGridClient = new SendGridClient(configuration["SendGrid.ApiKey"]!);
-		var from = new EmailAddress(configuration["SendGrid.FromEmail"]!);
+		var sendGridClient = new SendGridClient(configuration["SendGrid_ApiKey"]!);
+		var from = new EmailAddress(configuration["SendGrid_FromEmail"]!);
 		var to = new EmailAddress(email);
 		const string subject = "Welcome to Test API - Verify Your Email";
 		const string plainTextContent = "Welcome to Test API - Verify Your Email";
@@ -22,7 +22,7 @@ public class SendGridServiceService(IConfiguration configuration) : ISendGridSer
 
         <p><strong>{code}</strong></p>
 
-        <p>If you did not create an account with Test API or have any concerns, please contact our support team at {configuration["SendGrid:FromEmail"]}.</p>
+        <p>If you did not create an account with Test API or have any concerns, please contact our support team at {configuration["SendGrid_FromEmail"]}.</p>
 
         <p>Welcome aboard, and thank you for choosing Test API!</p>
 
@@ -36,8 +36,8 @@ public class SendGridServiceService(IConfiguration configuration) : ISendGridSer
 
 	public async Task SendForgotPasswordAsync(string email, string code)
 	{
-		var sendGridClient = new SendGridClient(configuration["SendGrid.ApiKey"]!);
-		var from = new EmailAddress(configuration["SendGrid.FromEmail"]!);
+		var sendGridClient = new SendGridClient(configuration["SendGrid_ApiKey"]!);
+		var from = new EmailAddress(configuration["SendGrid_FromEmail"]!);
 		var to = new EmailAddress(email);
 		const string subject = "Reset Your Password - Test API";
 		const string plainTextContent = "Reset Your Password - Test API";
@@ -49,7 +49,7 @@ public class SendGridServiceService(IConfiguration configuration) : ISendGridSer
 
         <p><strong>{code}</strong></p>
 
-        <p>If you did not request a password reset or have any concerns, please contact our support team at {configuration["SendGrid.FromEmail"]}.</p>
+        <p>If you did not request a password reset or have any concerns, please contact our support team at {configuration["SendGrid_FromEmail"]}.</p>
 
         <p>Thank you for choosing Test API. Your account security is important to us!</p>
 
@@ -63,8 +63,8 @@ public class SendGridServiceService(IConfiguration configuration) : ISendGridSer
 
 	public async Task SendSignInAsync(string email, string code)
 	{
-		var sendGridClient = new SendGridClient(configuration["SendGrid.ApiKey"]!);
-		var from = new EmailAddress(configuration["SendGrid.FromEmail"]!);
+		var sendGridClient = new SendGridClient(configuration["SendGrid_ApiKey"]!);
+		var from = new EmailAddress(configuration["SendGrid_FromEmail"]!);
 		var to = new EmailAddress(email);
 		const string subject = "Sign In Verification - Test API";
 		const string plainTextContent = "Sign In Verification - Test API";
@@ -76,7 +76,7 @@ public class SendGridServiceService(IConfiguration configuration) : ISendGridSer
 
         <p><strong>{code}</strong></p>
 
-        <p>If you did not initiate this sign-in or have any concerns, please contact our support team at {configuration["SendGrid.FromEmail"]}.</p>
+        <p>If you did not initiate this sign-in or have any concerns, please contact our support team at {configuration["SendGrid_FromEmail"]}.</p>
 
         <p>Thank you for choosing Test API. We appreciate your security commitment!</p>
 

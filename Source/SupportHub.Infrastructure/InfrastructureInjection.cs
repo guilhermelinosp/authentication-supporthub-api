@@ -37,11 +37,11 @@ public static class InfrastructureInjection
 	{
 		services.AddStackExchangeRedisCache(options =>
 		{
-			options.Configuration = configuration["Redis.ConnectionString"];
+			options.Configuration = configuration["Redis_ConnectionString"];
 		});
 
 		services.AddSingleton<IConnectionMultiplexer>(_ =>
-			ConnectionMultiplexer.Connect(configuration["Redis.ConnectionString"]!));
+			ConnectionMultiplexer.Connect(configuration["Redis_ConnectionString"]!));
 
 		services.AddScoped<ISessionCache, SessionCache>();
 		services.AddScoped<IOneTimePasswordCache, OneTimePasswordCache>();
@@ -50,14 +50,14 @@ public static class InfrastructureInjection
 	private static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddDbContext<ApplicationDbContext>(options =>
-			options.UseSqlServer(configuration["SqlServer.ConnectionString"]));
+			options.UseSqlServer(configuration["SqlServer_ConnectionString"]));
 	}
 
 	private static void AddHttpClients(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddHttpClient<IBrazilApi, BrazilApi>(options =>
 		{
-			options.BaseAddress = new Uri(configuration["BrazilApi.Url"]!);
+			options.BaseAddress = new Uri(configuration["BrazilApi_Url"]!);
 		});
 	}
 

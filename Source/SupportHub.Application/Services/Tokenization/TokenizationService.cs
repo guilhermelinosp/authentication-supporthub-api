@@ -18,7 +18,7 @@ public class TokenizationService(IConfiguration configuration) : ITokenizationSe
 			new JwtSecurityTokenHandler().ValidateToken(token, new TokenValidationParameters
 			{
 				ValidateIssuerSigningKey = true,
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt.Secret"]!)),
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt_Secret"]!)),
 				ValidateIssuer = false,
 				ValidateAudience = false,
 				ValidateLifetime = true
@@ -53,9 +53,9 @@ public class TokenizationService(IConfiguration configuration) : ITokenizationSe
 				{
 					new Claim("id", id)
 				}),
-				Expires = DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt.Expiry"]!, CultureInfo.CurrentCulture)),
+				Expires = DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt_Expiry"]!, CultureInfo.CurrentCulture)),
 				SigningCredentials = new SigningCredentials(
-					new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt.Secret"]!)),
+					new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt_Secret"]!)),
 					SecurityAlgorithms.HmacSha256Signature)
 			};
 

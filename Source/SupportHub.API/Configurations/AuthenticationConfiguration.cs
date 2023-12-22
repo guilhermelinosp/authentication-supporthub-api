@@ -19,7 +19,7 @@ public static class AuthenticationConfiguration
 			opt.TokenValidationParameters = new TokenValidationParameters
 			{
 				ValidateIssuerSigningKey = true,
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt.Secret"]!)),
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt_Secret"]!)),
 				ValidateIssuer = false,
 				ValidateAudience = false,
 				ValidateLifetime = true
