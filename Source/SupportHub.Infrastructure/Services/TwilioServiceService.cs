@@ -4,7 +4,7 @@ using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 
-namespace SupportHub.Auth.Infrastructure.Services;
+namespace SupportHub.Infrastructure.Services;
 
 public class TwilioServiceService(IConfiguration configuration) : ITwilioService
 {

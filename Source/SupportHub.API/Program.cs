@@ -1,6 +1,6 @@
 using SupportHub.API.Configurations;
 using SupportHub.API.Filters;
-using SupportHub.Authentication.Application;
+using SupportHub.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 

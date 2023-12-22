@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SupportHub.Domain.Entities;
 
-namespace SupportHub.Auth.Infrastructure.Contexts.EntityConfigurations;
+namespace SupportHub.Infrastructure.Contexts.EntityConfigurations;
 
 public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {

@@ -2,7 +2,7 @@
 using StackExchange.Redis;
 using SupportHub.Domain.Cache;
 
-namespace SupportHub.Auth.Infrastructure.Cache;
+namespace SupportHub.Infrastructure.Cache;
 
 public class OneTimePasswordCache(IConnectionMultiplexer redisConnection) : IOneTimePasswordCache
 {

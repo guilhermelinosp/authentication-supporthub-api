@@ -4,7 +4,7 @@ using FluentValidation.Results;
 using SupportHub.Domain.DTOs.Requests.Companies;
 using SupportHub.Domain.Exceptions;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.Validators;
+namespace SupportHub.Application.UseCases.Companies.Validators;
 
 public partial class SignInValidator : AbstractValidator<RequestSignIn>
 {

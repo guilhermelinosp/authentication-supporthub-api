@@ -3,7 +3,7 @@ using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.SignUp.Confirmation;
+namespace SupportHub.Application.UseCases.Companies.SignUp.Confirmation;
 
 public class ConfirmationSignUpUseCase(ICompanyRepository repository, IOneTimePasswordCache oneTimePassword)
 	: IConfirmationSignUpUseCase

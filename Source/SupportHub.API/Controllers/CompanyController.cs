@@ -1,15 +1,15 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using SupportHub.API.Controllers.Abstract;
+using SupportHub.Application.UseCases.Companies.ForgotPassword;
+using SupportHub.Application.UseCases.Companies.ForgotPassword.Confirmation;
+using SupportHub.Application.UseCases.Companies.SignIn;
+using SupportHub.Application.UseCases.Companies.SignIn.Confirmation;
+using SupportHub.Application.UseCases.Companies.SignOut;
+using SupportHub.Application.UseCases.Companies.SignUp;
+using SupportHub.Application.UseCases.Companies.SignUp.Confirmation;
 using SupportHub.Domain.DTOs.Requests.Companies;
 using SupportHub.Domain.DTOs.Responses;
-using SupportHub.Authentication.Application.UseCases.Companies.ForgotPassword;
-using SupportHub.Authentication.Application.UseCases.Companies.ForgotPassword.Confirmation;
-using SupportHub.Authentication.Application.UseCases.Companies.SignIn;
-using SupportHub.Authentication.Application.UseCases.Companies.SignIn.Confirmation;
-using SupportHub.Authentication.Application.UseCases.Companies.SignOut;
-using SupportHub.Authentication.Application.UseCases.Companies.SignUp;
-using SupportHub.Authentication.Application.UseCases.Companies.SignUp.Confirmation;
 
 
 namespace SupportHub.API.Controllers;

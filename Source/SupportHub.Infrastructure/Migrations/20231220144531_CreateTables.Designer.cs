@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SupportHub.Auth.Infrastructure.Contexts;
+using SupportHub.Infrastructure.Contexts;
 
 #nullable disable
 

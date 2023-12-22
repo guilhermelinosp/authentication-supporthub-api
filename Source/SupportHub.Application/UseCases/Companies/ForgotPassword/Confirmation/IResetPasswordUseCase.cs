@@ -1,7 +1,7 @@
 ﻿using SupportHub.Domain.DTOs.Requests.Companies;
 using SupportHub.Domain.DTOs.Responses;
 
-namespace SupportHub.Authentication.Application.UseCases.Companies.ForgotPassword.Confirmation;
+namespace SupportHub.Application.UseCases.Companies.ForgotPassword.Confirmation;
 
 public interface IResetPasswordUseCase : IApplicationInjection
 {

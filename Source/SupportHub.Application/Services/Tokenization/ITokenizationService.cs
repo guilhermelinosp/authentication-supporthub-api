@@ -1,4 +1,4 @@
-﻿namespace SupportHub.Authentication.Application.Services.Tokenization;
+﻿namespace SupportHub.Application.Services.Tokenization;
 
 public interface ITokenizationService : IApplicationInjection
 {

@@ -1,5 +1,6 @@
 ﻿namespace SupportHub.UnitTest.Utils.Builders;
 
-public class SignUpValidatorBuilder
+public class SignInBuilder
 {
+	
 }

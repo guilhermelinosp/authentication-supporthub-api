@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SupportHub.Domain.Entities;
 
-namespace SupportHub.Auth.Infrastructure.Contexts;
+namespace SupportHub.Infrastructure.Contexts;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
