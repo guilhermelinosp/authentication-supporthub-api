@@ -1,4 +1,5 @@
 ﻿using SupportHub.Application.Services.Cryptography;
+using SupportHub.Application.UseCases.Validators;
 using SupportHub.Domain.APIs;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Requests;
@@ -7,7 +8,6 @@ using SupportHub.Domain.Entities;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
 using SupportHub.Domain.Services;
-using SignUpValidator = SupportHub.Application.UseCases.Employees.Validators.SignUpValidator;
 
 namespace SupportHub.Application.UseCases.Companies.SignUp;
 

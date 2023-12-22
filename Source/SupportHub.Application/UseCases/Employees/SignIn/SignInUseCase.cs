@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SupportHub.Application.Services.Cryptography;
 using SupportHub.Application.Services.Tokenization;
-using SupportHub.Application.UseCases.Employees.Validators;
+using SupportHub.Application.UseCases.Validators;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;

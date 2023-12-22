@@ -4,7 +4,7 @@ using FluentValidation.Results;
 using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.Exceptions;
 
-namespace SupportHub.Application.UseCases.Employees.Validators;
+namespace SupportHub.Application.UseCases.Validators;
 
 public partial class SignUpValidator : AbstractValidator<RequestSignUp>
 {

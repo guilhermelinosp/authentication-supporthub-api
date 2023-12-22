@@ -1,11 +1,11 @@
 ﻿using SupportHub.Application.Services.Cryptography;
+using SupportHub.Application.UseCases.Validators;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;
 using SupportHub.Domain.Exceptions;
 using SupportHub.Domain.Repositories;
 using SupportHub.Domain.Services;
-using SignInValidator = SupportHub.Application.UseCases.Employees.Validators.SignInValidator;
 
 namespace SupportHub.Application.UseCases.Companies.SignIn;
 

@@ -1,4 +1,4 @@
-﻿using SupportHub.Application.UseCases.Companies.Validators;
+﻿using SupportHub.Application.UseCases.Validators;
 using SupportHub.Domain.Cache;
 using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.DTOs.Responses;

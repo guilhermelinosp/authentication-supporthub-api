@@ -2,7 +2,7 @@
 using SupportHub.Domain.DTOs.Requests;
 using SupportHub.Domain.Exceptions;
 
-namespace SupportHub.Application.UseCases.Companies.Validators;
+namespace SupportHub.Application.UseCases.Validators;
 
 public class ForgotPasswordValidator : AbstractValidator<RequestForgotPassword>
 {
