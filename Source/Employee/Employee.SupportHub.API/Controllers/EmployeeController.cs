@@ -1,9 +1,9 @@
 using System.Net;
 using Employee.SupportHub.API.Controllers.Abstract;
-using Employee.SupportHub.Application.UseCases.Employees.ForgotPassword;
-using Employee.SupportHub.Application.UseCases.Employees.ForgotPassword.Confirmation;
-using Employee.SupportHub.Application.UseCases.Employees.SignIn;
-using Employee.SupportHub.Application.UseCases.Employees.SignOut;
+using Employee.SupportHub.Application.UseCases.ForgotPassword;
+using Employee.SupportHub.Application.UseCases.ForgotPassword.Confirmation;
+using Employee.SupportHub.Application.UseCases.SignIn;
+using Employee.SupportHub.Application.UseCases.SignOut;
 using Employee.SupportHub.Domain.DTOs.Requests;
 using Employee.SupportHub.Domain.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;

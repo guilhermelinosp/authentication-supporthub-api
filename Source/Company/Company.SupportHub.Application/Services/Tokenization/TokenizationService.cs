@@ -27,13 +27,13 @@ public class TokenizationService(IConfiguration configuration) : ITokenizationSe
 			var jwtToken = (JwtSecurityToken)validatedToken;
 
 			if (jwtToken.ValidTo < DateTime.UtcNow)
-				throw new SecurityTokenExpiredException(MessagesException.TOKEN_EXPIRADO);
+				throw new SecurityTokenExpiredException(MessageException.TOKEN_EXPIRADO);
 
 			return new Guid(jwtToken.Claims.First(x => x.Type == "id").Value);
 		}
 		catch (SecurityTokenExpiredException)
 		{
-			throw new DefaultException(new List<string> { MessagesException.TOKEN_EXPIRADO });
+			throw new ExceptionDefault(new List<string> { MessageException.TOKEN_EXPIRADO });
 		}
 		catch (Exception ex)
 		{

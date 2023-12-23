@@ -4,17 +4,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 using Company.SupportHub.Domain.APIs;
-using Company.SupportHub.Domain.Cache;
 using Company.SupportHub.Domain.Repositories;
 using Company.SupportHub.Domain.Services;
 using Company.SupportHub.Infrastructure.APIs;
-using Company.SupportHub.Infrastructure.Cache;
 using Company.SupportHub.Infrastructure.Contexts;
 using Company.SupportHub.Infrastructure.Repositories;
 using Company.SupportHub.Infrastructure.Services;
 
 namespace Company.SupportHub.Infrastructure;
 
+public interface IInfrastructureInjection;
 public static class InfrastructureInjection
 {
 	public static void AddInfrastructureInjection(this IServiceCollection services, IConfiguration configuration)
@@ -40,9 +39,6 @@ public static class InfrastructureInjection
 
 		services.AddSingleton<IConnectionMultiplexer>(_ =>
 			ConnectionMultiplexer.Connect(configuration["Redis_ConnectionString"]!));
-
-		services.AddScoped<ISessionCache, SessionCache>();
-		services.AddScoped<IOneTimePasswordCache, OneTimePasswordCache>();
 	}
 
 	private static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
@@ -70,12 +66,12 @@ public static class InfrastructureInjection
 
 	private static void AddServices(this IServiceCollection services)
 	{
-		services.AddScoped<ISendGridService, SendGridServiceService>();
-		services.AddScoped<ITwilioService, TwilioServiceService>();
+		services.AddScoped<ISendGridService, SendGridService>();
+		services.AddScoped<ITwilioService, TwilioService>();
+		services.AddScoped<IRedisService, RedisService>();
 	}
-
-	private static class InfrastructureAssembly
-	{
-		public static readonly Assembly Assembly = typeof(InfrastructureAssembly).Assembly;
-	}
+}
+public static class InfrastructureAssembly
+{
+	public static readonly Assembly Assembly = typeof(InfrastructureAssembly).Assembly;
 }

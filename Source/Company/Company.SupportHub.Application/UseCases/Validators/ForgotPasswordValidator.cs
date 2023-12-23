@@ -10,8 +10,8 @@ public class ForgotPasswordValidator : AbstractValidator<RequestForgotPassword>
 	{
 		RuleFor(e => e.Email)
 			.NotEmpty()
-			.WithMessage(MessagesException.EMAIL_NAO_INFORMADO)
+			.WithMessage(MessageException.EMAIL_NAO_INFORMADO)
 			.EmailAddress()
-			.WithMessage(MessagesException.EMAIL_INVALIDO);
+			.WithMessage(MessageException.EMAIL_INVALIDO);
 	}
 }

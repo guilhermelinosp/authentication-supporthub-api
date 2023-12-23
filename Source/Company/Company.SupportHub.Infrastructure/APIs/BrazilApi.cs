@@ -15,6 +15,6 @@ public class BrazilApi(HttpClient httpClient) : IBrazilApi
 		var cnpjReturn = await response.Content.ReadAsStringAsync();
 
 		if (!response.IsSuccessStatusCode)
-			throw new DefaultException([JsonConvert.DeserializeObject<ErrorResponse>(cnpjReturn)?.Message!]);
+			throw new ExceptionDefault([JsonConvert.DeserializeObject<ErrorResponse>(cnpjReturn)?.Message!]);
 	}
 }

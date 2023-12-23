@@ -12,16 +12,16 @@ public partial class ResetPasswordValidator : AbstractValidator<RequestResetPass
 	{
 		RuleFor(c => c.Password)
 			.NotEmpty()
-			.WithMessage(MessagesException.SENHA_NAO_INFORMADO)
+			.WithMessage(MessageException.SENHA_NAO_INFORMADO)
 			.MinimumLength(8)
-			.WithMessage(MessagesException.SENHA_MINIMO_OITO_CARACTERES)
+			.WithMessage(MessageException.SENHA_MINIMO_OITO_CARACTERES)
 			.MaximumLength(16)
-			.WithMessage(MessagesException.SENHA_MAXIMO_DEZESSEIS_CARACTERES)
+			.WithMessage(MessageException.SENHA_MAXIMO_DEZESSEIS_CARACTERES)
 			.Custom((password, validator) =>
 			{
 				if (!MyRegex().IsMatch(password))
 					validator.AddFailure(new ValidationFailure(
-						nameof(RequestResetPassword.Password), MessagesException.SENHA_INVALIDA));
+						nameof(RequestResetPassword.Password), MessageException.SENHA_INVALIDA));
 			});
 	}
 

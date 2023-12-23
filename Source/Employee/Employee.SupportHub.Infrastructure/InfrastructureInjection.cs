@@ -1,10 +1,6 @@
 ﻿using System.Reflection;
-using Employee.SupportHub.Domain.APIs;
-using Employee.SupportHub.Domain.Cache;
 using Employee.SupportHub.Domain.Repositories;
 using Employee.SupportHub.Domain.Services;
-using Employee.SupportHub.Infrastructure.APIs;
-using Employee.SupportHub.Infrastructure.Cache;
 using Employee.SupportHub.Infrastructure.Contexts;
 using Employee.SupportHub.Infrastructure.Repositories;
 using Employee.SupportHub.Infrastructure.Services;
@@ -15,11 +11,12 @@ using StackExchange.Redis;
 
 namespace Employee.SupportHub.Infrastructure;
 
+public interface IInfrastructureInjection;
+
 public static class InfrastructureInjection
 {
 	public static void AddInfrastructureInjection(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddHttpClients(configuration);
 		services.AddDbContexts(configuration);
 		services.AddRepositories();
 		services.AddServices();
@@ -40,28 +37,14 @@ public static class InfrastructureInjection
 
 		services.AddSingleton<IConnectionMultiplexer>(_ =>
 			ConnectionMultiplexer.Connect(configuration["Redis_ConnectionString"]!));
-
-		services.AddScoped<ISessionCache, SessionCache>();
-		services.AddScoped<IOneTimePasswordCache, OneTimePasswordCache>();
 	}
 
 	private static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddDbContext<ApplicationDbContext>(options =>
-			options.UseSqlServer(configuration["SqlServer_ConnectionString"], sqlOptions =>
-			{
-				sqlOptions.MigrationsAssembly("CompanyEntity.SupportHub.Infrastructure");
-				sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
-			}));
+		services.AddDbContextPool<ApplicationDbContext>(options =>
+			options.UseSqlServer(configuration["SqlServer_ConnectionString"]));
 	}
 
-	private static void AddHttpClients(this IServiceCollection services, IConfiguration configuration)
-	{
-		services.AddHttpClient<IBrazilApi, BrazilApi>(options =>
-		{
-			options.BaseAddress = new Uri(configuration["BrazilApi_Url"]!);
-		});
-	}
 
 	private static void AddRepositories(this IServiceCollection services)
 	{
@@ -70,12 +53,12 @@ public static class InfrastructureInjection
 
 	private static void AddServices(this IServiceCollection services)
 	{
-		services.AddScoped<ISendGridService, SendGridServiceService>();
-		services.AddScoped<ITwilioService, TwilioServiceService>();
+		services.AddScoped<ISendGridService, SendGridService>();
+		services.AddScoped<IRedisService, RedisService>();
 	}
+}
 
-	private static class InfrastructureAssembly
-	{
-		public static readonly Assembly Assembly = typeof(InfrastructureAssembly).Assembly;
-	}
+public static class InfrastructureAssembly
+{
+	public static readonly Assembly Assembly = typeof(InfrastructureAssembly).Assembly;
 }

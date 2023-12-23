@@ -9,30 +9,24 @@
     }
   },
   "profiles": {
-    "http": {
+    "HTTP": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
+      "hotReloadEnabled": true,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5048",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "HTTPS": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
+      "hotReloadEnabled": true,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7030;http://localhost:5048",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

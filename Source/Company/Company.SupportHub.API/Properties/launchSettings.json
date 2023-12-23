@@ -15,7 +15,7 @@
       "launchBrowser": false,
       "hotReloadEnabled": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:8080",
+      "applicationUrl": "http://localhost:3652",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -26,7 +26,7 @@
       "launchBrowser": false,
       "hotReloadEnabled": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:8081",
+      "applicationUrl": "https://localhost:9437",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
