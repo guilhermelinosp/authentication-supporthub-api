@@ -20,7 +20,7 @@ public partial class SignInValidator : AbstractValidator<RequestSignIn>
 			.Custom((password, validator) =>
 			{
 				if (!MyRegex().IsMatch(password))
-					validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Password),
+					validator.AddFailure(new ValidationFailure(nameof(RequestSignIn.Password),
 						MessagesException.SENHA_INVALIDA));
 			});
 

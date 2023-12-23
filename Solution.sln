@@ -46,6 +46,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.SupportHub.Infrastructure", "Source\Customer\Customer.SupportHub.Infrastructure\Customer.SupportHub.Infrastructure.csproj", "{E57DD158-6642-4E7E-B666-B7604BE8EE0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.SupportHub.Application", "Source\Employee\Employee.SupportHub.Application\Employee.SupportHub.Application.csproj", "{819A4304-2CDC-4249-BD77-A6F456A7441D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6F952105-C571-4655-B4A9-DFE07BE9C606} = {6F952105-C571-4655-B4A9-DFE07BE9C606}
+		{C372F79B-138B-4EDA-863F-3C45C67C1EC5} = {C372F79B-138B-4EDA-863F-3C45C67C1EC5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.SupportHub.Domain", "Source\Employee\Employee.SupportHub.Domain\Employee.SupportHub.Domain.csproj", "{6F952105-C571-4655-B4A9-DFE07BE9C606}"
 EndProject

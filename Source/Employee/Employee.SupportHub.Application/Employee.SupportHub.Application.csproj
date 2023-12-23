@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="11.8.0"/>
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.3"/>
         <PackageReference Include="Scrutor" Version="4.2.2"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0"/>
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0"/>
@@ -19,5 +20,6 @@
         <ProjectReference Include="..\Employee.SupportHub.Domain\Employee.SupportHub.Domain.csproj"/>
         <ProjectReference Include="..\Employee.SupportHub.Infrastructure\Employee.SupportHub.Infrastructure.csproj"/>
     </ItemGroup>
+
 
 </Project>
