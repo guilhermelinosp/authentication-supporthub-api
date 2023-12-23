@@ -43,7 +43,7 @@ public static class InfrastructureInjection
 
 	private static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddDbContext<ApplicationDbContext>(options =>
+		services.AddDbContext<InfrastructureDbContext>(options =>
 			options.UseSqlServer(configuration["SqlServer_ConnectionString"], sqlOptions =>
 			{
 				sqlOptions.MigrationsAssembly("Company.SupportHub.Infrastructure");
@@ -62,6 +62,7 @@ public static class InfrastructureInjection
 	private static void AddRepositories(this IServiceCollection services)
 	{
 		services.AddScoped<ICompanyRepository, CompanyRepository>();
+		services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 	}
 
 	private static void AddServices(this IServiceCollection services)

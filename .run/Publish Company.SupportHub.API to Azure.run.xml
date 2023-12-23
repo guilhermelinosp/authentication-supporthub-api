@@ -53,7 +53,7 @@
     <option name="AZURE_WEB_APP_LOCATION" value="eastus" />
     <option name="AZURE_WEB_APP_PRICING_TIER" value="S1" />
     <option name="AZURE_WEB_APP_NET_FRAMEWORK" value="4.7" />
-    <option name="AZURE_WEB_APP_NET_CORE_RUNTIME" value="DOTNETCORE 2.1" />
+    <option name="AZURE_WEB_APP_NET_CORE_RUNTIME" value="DOTNETCORE 8.0" />
     <option name="AZURE_WEB_APP_IS_DEPLOY_TO_SLOT" value="0" />
     <option name="AZURE_WEB_APP_SLOT_NAME" value="" />
     <option name="AZURE_WEB_APP_OPEN_BROWSER_PUBLISH" value="1" />

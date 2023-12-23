@@ -20,4 +20,8 @@
         <ProjectReference Include="..\Customer.SupportHub.Infrastructure\Customer.SupportHub.Infrastructure.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="UseCases\Employee\" />
+    </ItemGroup>
+
 </Project>

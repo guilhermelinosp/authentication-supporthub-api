@@ -1,4 +1,4 @@
-﻿namespace Company.SupportHub.Domain.Exceptions;
+﻿namespace Company.SupportHub.Domain.Messages;
 
 public record MessageException
 {

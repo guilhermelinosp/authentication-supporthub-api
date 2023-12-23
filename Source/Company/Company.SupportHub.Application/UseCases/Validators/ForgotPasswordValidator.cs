@@ -1,5 +1,6 @@
 ﻿using Company.SupportHub.Domain.DTOs.Requests;
 using Company.SupportHub.Domain.Exceptions;
+using Company.SupportHub.Domain.Messages;
 using FluentValidation;
 
 namespace Company.SupportHub.Application.UseCases.Validators;

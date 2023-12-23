@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Customer.SupportHub.Infrastructure.Repositories;
 
-public class CustomerRepository(ApplicationDbContext context) : ICustomerRepository, IInfrastructureInjection
+public class CustomerRepository(InfrastructureDbContext context) : ICustomerRepository, IInfrastructureInjection
 {
 	public async Task<Domain.Entities.Customer?> FindCustomerByIdAsync(Guid customerid)
 	{

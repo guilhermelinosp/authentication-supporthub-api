@@ -1,4 +1,4 @@
-﻿namespace Customer.SupportHub.Domain.DTOs.Responses;
+﻿namespace Customer.SupportHub.Domain.Messages;
 
 public record MessageResponse
 {

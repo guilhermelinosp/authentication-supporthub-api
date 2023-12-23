@@ -1,4 +1,4 @@
-﻿namespace Company.SupportHub.UnitTest.Customer.Validators;
+﻿namespace Company.SupportHub.UnitTest.Validators;
 
 public class ResetPasswordValidator
 {

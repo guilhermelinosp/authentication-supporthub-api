@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Company.SupportHub.Domain.Services;
+using Newtonsoft.Json;
 using StackExchange.Redis;
 
 namespace Company.SupportHub.Infrastructure.Services;

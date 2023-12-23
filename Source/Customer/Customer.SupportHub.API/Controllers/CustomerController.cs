@@ -1,9 +1,10 @@
 using System.Net;
 using Customer.SupportHub.API.Controllers.Abstract;
-using Customer.SupportHub.Application.UseCases.ForgotPassword;
-using Customer.SupportHub.Application.UseCases.ForgotPassword.Confirmation;
-using Customer.SupportHub.Application.UseCases.SignIn;
-using Customer.SupportHub.Application.UseCases.SignOut;
+using Customer.SupportHub.Application.UseCases.Customer.ForgotPassword;
+using Customer.SupportHub.Application.UseCases.Customer.ForgotPassword.Confirmation;
+using Customer.SupportHub.Application.UseCases.Customer.SignIn;
+using Customer.SupportHub.Application.UseCases.Customer.SignIn.Confirmation;
+using Customer.SupportHub.Application.UseCases.Customer.SignOut;
 using Customer.SupportHub.Domain.DTOs.Requests;
 using Customer.SupportHub.Domain.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +17,29 @@ namespace Customer.SupportHub.API.Controllers;
 [ProducesResponseType<BaseActionResult<ResponseException>>(StatusCodes.Status400BadRequest)]
 [ProducesResponseType<BaseActionResult<ResponseDefault>>(StatusCodes.Status200OK)]
 public class CustomerController(
+	IConfirmationSignInUseCase confirmationSignIn,
 	ISignInUseCase signIn,
 	ISignOutUseCase signOut,
-	IResetPasswordUseCase resetPassword,
-	IForgotPasswordUseCase forgotPassword) : Controller
+	IForgotPasswordUseCase forgotPassword,
+	IResetPasswordUseCase resetPassword) : Controller
 {
+
 	[HttpPost("signin")]
-	public async Task<BaseActionResult<ResponseToken>> SignInRequest([FromBody] RequestSignIn request)
+	public async Task<BaseActionResult<ResponseDefault>> SignInRequest([FromBody] RequestSignIn request)
 	{
 		var response = await signIn.ExecuteAsync(request);
+		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
+	}
+
+	[HttpPost("signin/{accountId}/{otp}")]
+	[ProducesResponseType<BaseActionResult<ResponseToken>>(StatusCodes.Status200OK)]
+	public BaseActionResult<ResponseToken> SignInConfirmationRequest([FromRoute] string accountId,
+		[FromRoute] string otp)
+	{
+		var response = confirmationSignIn.ExecuteAsync(accountId, otp);
 		return new BaseActionResult<ResponseToken>(HttpStatusCode.OK, response);
 	}
+
 
 	[HttpGet("signout")]
 	public async Task<BaseActionResult<ResponseDefault>> SignOutRequest()

@@ -1,6 +1,7 @@
 using System.Net;
 using Company.SupportHub.Domain.DTOs.Responses;
 using Company.SupportHub.Domain.Exceptions;
+using Company.SupportHub.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

@@ -1,4 +1,4 @@
-﻿namespace Company.SupportHub.Infrastructure.Services;
+﻿namespace Company.SupportHub.Domain.Services;
 
 public interface IRedisService
 {

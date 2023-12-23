@@ -1,24 +1,51 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Interfaces;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Customer.SupportHub.API.Configurations;
-
-public static class SwaggerConfiguration
+namespace Customer.SupportHub.API.Configurations
 {
-	public static void AddSwaggerConfiguration(this IServiceCollection services, IConfiguration configuration)
+	public static class SwaggerConfiguration
 	{
-		services.AddEndpointsApiExplorer();
-		services.AddHttpContextAccessor();
+		public static void AddSwaggerConfiguration(this IServiceCollection services, IConfiguration configuration)
+		{
+			services.AddEndpointsApiExplorer();
+			services.AddHttpContextAccessor();
 
-		services.AddSwaggerGen(opt =>
+			services.AddSwaggerGen(opt =>
+			{
+				ConfigureApiInfo(opt);
+
+				ConfigureSecurityDefinitions(opt);
+			});
+		}
+
+		private static void ConfigureApiInfo(SwaggerGenOptions opt)
 		{
 			opt.SwaggerDoc("v1", new OpenApiInfo
 			{
-				Title = "Authentication Support Hub API",
+				Title = "Customer Support Hub API - Authentication",
 				Version = "V1",
-				Description = "API for handling client authentication.",
-				Contact = new OpenApiContact { Name = "Projetin" }
+				Description =
+					"Welcome to the Customer Support Hub API, your gateway to seamless client authentication. This API empowers developers with secure and efficient tools for managing user authentication processes. Dive into a world of cutting-edge authentication solutions designed to elevate your projects. Explore our documentation to harness the full potential of the Customer Support Hub API.",
+				Contact = new OpenApiContact { Name = "Support Hub", Email = "guilhermelinosp@gmail.com" },
+				License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") },
+				TermsOfService = new Uri("https://your-terms-of-service-url.com"),
+				Extensions = new Dictionary<string, IOpenApiExtension>
+				{
+					{
+						"x-logo", new OpenApiObject
+						{
+							{ "url", new OpenApiString("https://i.imgur.com/8QZqQ8F.png") },
+							{ "altText", new OpenApiString("Customer Support Hub API") }
+						}
+					}
+				}
 			});
+		}
 
+		private static void ConfigureSecurityDefinitions(SwaggerGenOptions opt)
+		{
 			opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 			{
 				Name = "Authorization",
@@ -26,7 +53,7 @@ public static class SwaggerConfiguration
 				Scheme = "Bearer",
 				In = ParameterLocation.Header,
 				Description =
-					"JWT Authorization header utilizando o Bearer scheme. Example: \"Authorization: Bearer {token}\""
+					"JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
 			});
 
 			opt.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -43,6 +70,6 @@ public static class SwaggerConfiguration
 					Array.Empty<string>()
 				}
 			});
-		});
+		}
 	}
 }

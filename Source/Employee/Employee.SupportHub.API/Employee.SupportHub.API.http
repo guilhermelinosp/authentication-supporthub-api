@@ -1,6 +1,0 @@
-@Employee.SupportHub.API_HostAddress = http://localhost:5048
-
-GET {{Employee.SupportHub.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
