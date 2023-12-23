@@ -20,8 +20,6 @@ public class ConfirmationSignInUseCase(
 		if (!validatorCode)
 			throw new ExceptionDefault([MessageException.CODIGO_INVALIDO]);
 
-		redis.SetSessionAccountAsync(accountId);
-
 		return new ResponseToken
 		{
 			Token = tokenizationService.GenerateToken(accountId),

@@ -27,7 +27,7 @@ namespace Company.SupportHub.API.Configurations
 				Title = "Company Support Hub API - Authentication",
 				Version = "V1",
 				Description =
-					"Welcome to the Company Support Hub API, your gateway to seamless client authentication. This API empowers developers with secure and efficient tools for managing user authentication processes. Dive into a world of cutting-edge authentication solutions designed to elevate your projects. Explore our documentation to harness the full potential of the Authentication Company Support Hub API.",
+					"Welcome to the Company Support Hub API, your gateway to seamless client authentication. This API empowers developers with secure and efficient tools for managing user authentication processes. Dive into a world of cutting-edge authentication solutions designed to elevate your projects. Explore our documentation to harness the full potential of the Company Support Hub API.",
 				Contact = new OpenApiContact { Name = "Support Hub", Email = "guilhermelinosp@gmail.com" },
 				License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") },
 				TermsOfService = new Uri("https://your-terms-of-service-url.com"),
