@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Company.SupportHub.Domain.APIs;
+using Customer.SupportHub.Domain.APIs;
 using Customer.SupportHub.Domain.Repositories;
 using Customer.SupportHub.Domain.Services;
 using Customer.SupportHub.Infrastructure.APIs;

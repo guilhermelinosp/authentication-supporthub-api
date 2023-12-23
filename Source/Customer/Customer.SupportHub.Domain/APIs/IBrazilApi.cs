@@ -1,4 +1,4 @@
-﻿namespace Company.SupportHub.Domain.APIs;
+﻿namespace Customer.SupportHub.Domain.APIs;
 
 public interface IBrazilApi
 {

@@ -1,6 +1,6 @@
 ﻿using Customer.SupportHub.Domain.DTOs.Responses;
 
-namespace Customer.SupportHub.Application.UseCases.Customer.SignOut;
+namespace Customer.SupportHub.Application.UseCases.Employee.SignOut;
 
 public interface ISignOutUseCase : IApplicationInjection
 {

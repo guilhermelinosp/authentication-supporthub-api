@@ -3,7 +3,7 @@ using Customer.SupportHub.Domain.DTOs.Responses;
 using Customer.SupportHub.Domain.Messages;
 using Customer.SupportHub.Domain.Services;
 
-namespace Customer.SupportHub.Application.UseCases.Customer.SignOut;
+namespace Customer.SupportHub.Application.UseCases.Employee.SignOut;
 
 public class SignOutUseCase(
 	IRedisService redis,

@@ -1,5 +1,5 @@
 ﻿using Azure;
-using Company.SupportHub.Domain.APIs;
+using Customer.SupportHub.Domain.APIs;
 using Customer.SupportHub.Domain.Exceptions;
 using Newtonsoft.Json;
 

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Customer.SupportHub.API.Controllers.Abstract;
-using Customer.SupportHub.Application.UseCases.Customer.SignOut;
 using Customer.SupportHub.Application.UseCases.Employee.SignIn;
+using Customer.SupportHub.Application.UseCases.Employee.SignOut;
 using Customer.SupportHub.Domain.DTOs.Requests;
 using Customer.SupportHub.Domain.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
