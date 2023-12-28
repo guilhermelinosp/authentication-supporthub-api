@@ -3,9 +3,7 @@ using Company.SupportHub.API.Filters;
 using Company.SupportHub.Application;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var configuration = builder.Configuration;
-
 var services = builder.Services;
 
 services.AddApplicationInjection(configuration);
@@ -22,7 +20,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseDeveloperExceptionPage();
 	configuration.AddUserSecrets<Program>();
 }
 

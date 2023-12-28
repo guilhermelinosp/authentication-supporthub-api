@@ -60,16 +60,6 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 
 		var storedSession = JsonConvert.DeserializeObject<SessionAccount>(sessionJson!);
 
-		return (bool)storedSession?.SessionIsActive;
+		return storedSession!.SessionIsActive!;
 	}
-}
-
-public class SessionAccount
-{
-	public bool SessionIsActive { get; set; }
-}
-
-public class Otp
-{
-	public required string Code { get; set; }
 }

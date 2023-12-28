@@ -1,6 +1,8 @@
-﻿namespace Company.SupportHub.Domain.Services;
+﻿using Customer.SupportHub.Infrastructure;
 
-public interface IRedisService
+namespace Company.SupportHub.Domain.Services;
+
+public interface IRedisService:IInfrastructureInjection
 {
 	string GenerateOneTimePassword(string accountId);
 

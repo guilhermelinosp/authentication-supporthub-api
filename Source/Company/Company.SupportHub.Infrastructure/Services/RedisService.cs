@@ -1,4 +1,5 @@
 ﻿using Company.SupportHub.Domain.Services;
+using Company.SupportHub.Domain.VOs;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 
@@ -12,7 +13,7 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 
 		var otp = new Random().Next(100000, 999999).ToString();
 
-		var otpObject = new Otp { Code = otp };
+		var otpObject = new OneTimePassword { Code = otp };
 		var otpJson = JsonConvert.SerializeObject(otpObject);
 
 		redisDb.StringSet($"OTP-{accountId}", otpJson, TimeSpan.FromMinutes(5));
@@ -27,7 +28,7 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 
 		if (string.IsNullOrEmpty(storedOtpJson)) return false;
 
-		var storedOtp = JsonConvert.DeserializeObject<Otp>(storedOtpJson!);
+		var storedOtp = JsonConvert.DeserializeObject<OneTimePassword>(storedOtpJson!);
 
 		return storedOtp?.Code == otpCode;
 	}
@@ -36,7 +37,7 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 	{
 		var redisDb = redisConnection.GetDatabase();
 
-		var session = JsonConvert.SerializeObject(new SessionAccount { SessionIsActive = true });
+		var session = JsonConvert.SerializeObject(new SessionStorage { SessionIsActive = true });
 
 		redisDb.StringSet($"S-{accountId}", session, TimeSpan.FromMinutes(720));
 	}
@@ -45,7 +46,7 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 	{
 		var redisDb = redisConnection.GetDatabase();
 
-		var session = JsonConvert.SerializeObject(new SessionAccount { SessionIsActive = false });
+		var session = JsonConvert.SerializeObject(new SessionStorage { SessionIsActive = false });
 
 		redisDb.StringSet($"S-{accountId}", session, TimeSpan.FromMinutes(720));
 	}
@@ -58,18 +59,8 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 
 		if (string.IsNullOrEmpty(sessionJson)) return false;
 
-		var storedSession = JsonConvert.DeserializeObject<SessionAccount>(sessionJson!);
+		var storedSession = JsonConvert.DeserializeObject<SessionStorage>(sessionJson!);
 
-		return (bool)storedSession?.SessionIsActive;
+		return storedSession!.SessionIsActive;
 	}
-}
-
-public class SessionAccount
-{
-	public bool SessionIsActive { get; set; }
-}
-
-public class Otp
-{
-	public required string Code { get; set; }
 }

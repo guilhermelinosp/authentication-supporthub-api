@@ -83,14 +83,13 @@ public class TokenizationService(IConfiguration configuration) : ITokenizationSe
 		var salt = new byte[32];
 		using var random = RandomNumberGenerator.Create();
 		random.GetBytes(salt);
-		Convert.ToBase64String(salt);
 	}
 
-	public static void UpdateRefreshToken(string refreshToken)
+	public static string UpdateRefreshToken(string refreshToken)
 	{
 		var salt = new byte[32];
 		using var random = RandomNumberGenerator.Create();
 		random.GetBytes(salt);
-		Convert.ToBase64String(salt);
+		return Convert.ToBase64String(salt);
 	}
 }

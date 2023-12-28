@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Customer.SupportHub.Application;
 
-public interface IApplicationInjection;
 public static class ApplicationInjection
 {
 	public static void AddApplicationInjection(this IServiceCollection services,

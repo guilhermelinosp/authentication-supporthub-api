@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Customer.SupportHub.Domain.APIs;
+﻿using Customer.SupportHub.Domain.APIs;
 using Customer.SupportHub.Domain.Repositories;
 using Customer.SupportHub.Domain.Services;
 using Customer.SupportHub.Infrastructure.APIs;
@@ -12,8 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 
 namespace Customer.SupportHub.Infrastructure;
-
-public interface IInfrastructureInjection;
 
 public static class InfrastructureInjection
 {
@@ -72,9 +69,4 @@ public static class InfrastructureInjection
 		services.AddScoped<ITwilioService, TwilioService>();
 		services.AddScoped<IRedisService, RedisService>();
 	}
-}
-
-public static class InfrastructureAssembly
-{
-	public static readonly Assembly Assembly = typeof(InfrastructureAssembly).Assembly;
 }

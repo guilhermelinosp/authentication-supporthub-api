@@ -1,6 +1,8 @@
-﻿namespace Company.SupportHub.Domain.Services;
+﻿using Customer.SupportHub.Infrastructure;
 
-public interface ISendGridService
+namespace Company.SupportHub.Domain.Services;
+
+public interface ISendGridService : IInfrastructureInjection
 {
 	Task SendSignUpAsync(string email, string code);
 	Task SendForgotPasswordAsync(string email, string code);

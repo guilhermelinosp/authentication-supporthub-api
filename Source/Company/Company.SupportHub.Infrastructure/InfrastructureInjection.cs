@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
@@ -13,16 +12,13 @@ using Company.SupportHub.Infrastructure.Services;
 
 namespace Company.SupportHub.Infrastructure;
 
-public interface IInfrastructureInjection;
 public static class InfrastructureInjection
 {
 	public static void AddInfrastructureInjection(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddHttpClients(configuration);
-		services.AddDbContexts(configuration);
-		services.AddRepositories();
-		services.AddServices();
-		services.AddCaches(configuration);
+		services.AddHttpClient(configuration);
+		services.AddDbContext(configuration);
+		services.AddRedis(configuration);
 
 		services.Scan(scan =>
 			scan.FromAssemblies(InfrastructureAssembly.Assembly)
@@ -30,7 +26,7 @@ public static class InfrastructureInjection
 				.WithScopedLifetime());
 	}
 
-	private static void AddCaches(this IServiceCollection services, IConfiguration configuration)
+	private static void AddRedis(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddStackExchangeRedisCache(options =>
 		{
@@ -41,38 +37,17 @@ public static class InfrastructureInjection
 			ConnectionMultiplexer.Connect(configuration["Redis_ConnectionString"]!));
 	}
 
-	private static void AddDbContexts(this IServiceCollection services, IConfiguration configuration)
+	private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddDbContext<InfrastructureDbContext>(options =>
-			options.UseSqlServer(configuration["SqlServer_ConnectionString"], sqlOptions =>
-			{
-				sqlOptions.MigrationsAssembly("Company.SupportHub.Infrastructure");
-				sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
-			}));
+			options.UseSqlServer(configuration["SqlServer_ConnectionString"]));
 	}
 
-	private static void AddHttpClients(this IServiceCollection services, IConfiguration configuration)
+	private static void AddHttpClient(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddHttpClient<IBrazilApi, BrazilApi>(options =>
 		{
 			options.BaseAddress = new Uri(configuration["BrazilApi_Url"]!);
 		});
 	}
-
-	private static void AddRepositories(this IServiceCollection services)
-	{
-		services.AddScoped<ICompanyRepository, CompanyRepository>();
-		services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-	}
-
-	private static void AddServices(this IServiceCollection services)
-	{
-		services.AddScoped<ISendGridService, SendGridService>();
-		services.AddScoped<ITwilioService, TwilioService>();
-		services.AddScoped<IRedisService, RedisService>();
-	}
-}
-public static class InfrastructureAssembly
-{
-	public static readonly Assembly Assembly = typeof(InfrastructureAssembly).Assembly;
 }

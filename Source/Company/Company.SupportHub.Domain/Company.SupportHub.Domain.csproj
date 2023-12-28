@@ -20,4 +20,8 @@
         </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Customer\Customer.SupportHub.Infrastructure\Customer.SupportHub.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
