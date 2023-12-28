@@ -4,6 +4,8 @@ using Company.SupportHub.Application.UseCases.Employee.SignIn;
 using Company.SupportHub.Application.UseCases.Employee.SignOut;
 using Company.SupportHub.Domain.DTOs.Requests;
 using Company.SupportHub.Domain.DTOs.Responses;
+using Company.SupportHub.Domain.Exceptions;
+using Company.SupportHub.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.SupportHub.API.Controllers;
@@ -27,7 +29,12 @@ public class EmployeeController(
 	[HttpGet("signout")]
 	public async Task<BaseActionResult<ResponseDefault>> SignOutRequest()
 	{
-		var token = Request.Headers.Authorization.ToString().Split(" ")[1];
+		var token = HttpContext!.Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+		if (string.IsNullOrWhiteSpace(token))
+		{
+			throw new ExceptionDefault([MessageException.TOKEN_NAO_INFORMADO]);
+		}
+		
 		var response = await signOut.ExecuteAsync(token);
 		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
 	}
