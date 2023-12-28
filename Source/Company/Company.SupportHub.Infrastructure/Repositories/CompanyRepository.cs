@@ -5,7 +5,7 @@ using Company.SupportHub.Infrastructure.Contexts;
 
 namespace Company.SupportHub.Infrastructure.Repositories;
 
-public class CompanyRepository(InfrastructureDbContext context) : ICompanyRepository
+public class CompanyRepository(InfrastructureDbContext context) : ICompanyRepository, IInfrastructureInjection
 {
 	public async Task<Domain.Entities.Company?> FindCompanyByIdAsync(Guid companyid)
 	{

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Company.SupportHub.Infrastructure.Repositories;
 
-public class EmployeeRepository(InfrastructureDbContext context) : IEmployeeRepository
+public class EmployeeRepository(InfrastructureDbContext context) : IEmployeeRepository, IInfrastructureInjection
 {
 	public async Task<Employee?> FindEmployeeByIdAsync(Guid employeeId)
 	{

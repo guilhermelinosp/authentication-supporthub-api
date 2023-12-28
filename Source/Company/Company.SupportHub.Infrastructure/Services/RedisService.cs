@@ -5,7 +5,7 @@ using StackExchange.Redis;
 
 namespace Company.SupportHub.Infrastructure.Services;
 
-public class RedisService(IConnectionMultiplexer redisConnection) : IRedisService
+public class RedisService(IConnectionMultiplexer redisConnection) : IRedisService, IInfrastructureInjection
 {
 	public string GenerateOneTimePassword(string accountId)
 	{

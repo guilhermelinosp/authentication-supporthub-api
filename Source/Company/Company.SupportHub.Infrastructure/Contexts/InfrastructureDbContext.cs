@@ -7,3 +7,4 @@ public class InfrastructureDbContext(DbContextOptions<InfrastructureDbContext> o
 	public DbSet<Domain.Entities.Company>? Companies { get; set; }
 	public DbSet<Domain.Entities.Employee>? Employees { get; set; }
 }
+

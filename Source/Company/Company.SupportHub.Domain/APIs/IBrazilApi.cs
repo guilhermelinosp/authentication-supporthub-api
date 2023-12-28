@@ -1,4 +1,5 @@
-﻿using Customer.SupportHub.Infrastructure;
+﻿using Company.SupportHub.Domain.DTOs.Responses.APIs;
+using Customer.SupportHub.Infrastructure;
 
 namespace Company.SupportHub.Domain.APIs;
 

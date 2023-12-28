@@ -3,6 +3,7 @@ using Company.SupportHub.Application.UseCases.Validators;
 using Company.SupportHub.Domain.APIs;
 using Company.SupportHub.Domain.DTOs.Requests;
 using Company.SupportHub.Domain.DTOs.Responses;
+using Company.SupportHub.Domain.DTOs.Responses.APIs;
 using Company.SupportHub.Domain.Exceptions;
 using Company.SupportHub.Domain.Messages;
 using Company.SupportHub.Domain.Repositories;

@@ -3,7 +3,7 @@ using Customer.SupportHub.Infrastructure;
 
 namespace Company.SupportHub.Domain.Repositories;
 
-public interface ICompanyRepository:IInfrastructureInjection
+public interface ICompanyRepository
 {
 	Task<Entities.Company?> FindCompanyByIdAsync(Guid companyid);
 	Task<Entities.Company?> FindCompanyByEmailAsync(string email);

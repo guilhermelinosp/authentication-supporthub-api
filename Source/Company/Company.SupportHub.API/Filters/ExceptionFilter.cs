@@ -12,6 +12,8 @@ public class ExceptionFilter : IExceptionFilter
 {
 	public void OnException(ExceptionContext context)
 	{
+		Console.WriteLine(context.Exception);
+		
 		if (context.Exception is ExceptionDefault exception)
 			context.Result = new ObjectResult(new { data = new ResponseException(exception.ErrorMessages!.ToList()) })
 			{
