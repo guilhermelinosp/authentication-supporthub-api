@@ -21,4 +21,8 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-*.md
+**/*.md
+**/.github
+**/.idea
+**/.gitignore
+**/.gitattributes
