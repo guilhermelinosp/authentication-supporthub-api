@@ -29,9 +29,6 @@ public class SignInUseCase(
 
 		if (!cryptographyService.VerifyPassword(request.Password, account.Password))
 			throw new DefaultException([MessageException.SENHA_INVALIDA]);
-		
-		if (account.IsVerified)
-			throw new DefaultException([MessageException.EMAIL_NAO_AUTENTICADO]);
 
 		var code = redis.GenerateOneTimePassword(account.CompanyId.ToString());
 
