@@ -18,7 +18,7 @@ public class ConfirmationSignInUseCase(
 	{
 		var validatorCode = redis.ValidateOneTimePassword(accountId, code);
 		if (!validatorCode)
-			throw new ExceptionDefault([MessageException.CODIGO_INVALIDO]);
+			throw new DefaultException([MessageException.CODIGO_INVALIDO]);
 
 		return new ResponseToken
 		{

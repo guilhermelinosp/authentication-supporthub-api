@@ -1,9 +1,6 @@
-﻿using Company.SupportHub.Domain.DTOs.Responses.APIs;
-using Customer.SupportHub.Infrastructure;
+﻿namespace Company.SupportHub.Domain.APIs;
 
-namespace Company.SupportHub.Domain.APIs;
-
-public interface IBrazilApi : IInfrastructureInjection
+public interface IBrazilApi
 {
 	Task ConsultaCnpj(string cnpj);
 }

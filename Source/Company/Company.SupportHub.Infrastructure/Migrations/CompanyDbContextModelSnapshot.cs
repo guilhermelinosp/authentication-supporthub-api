@@ -4,19 +4,16 @@ using Company.SupportHub.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace Company.SupportHub.Infrastructure.Migrations
 {
-    [DbContext(typeof(InfrastructureDbContext))]
-    [Migration("20231228152740_InitialCreateTable")]
-    partial class InitialCreateTable
+    [DbContext(typeof(CompanyDbContext))]
+    partial class CompanyDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

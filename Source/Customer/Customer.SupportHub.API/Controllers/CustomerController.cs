@@ -23,7 +23,6 @@ public class CustomerController(
 	IForgotPasswordUseCase forgotPassword,
 	IResetPasswordUseCase resetPassword) : Controller
 {
-
 	[HttpPost("signin")]
 	public async Task<BaseActionResult<ResponseDefault>> SignInRequest([FromBody] RequestSignIn request)
 	{

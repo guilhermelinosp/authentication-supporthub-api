@@ -24,18 +24,21 @@ public class SignInUseCase(
 	{
 		var validator = await new SignInValidator().ValidateAsync(request);
 		if (!validator.IsValid)
-			throw new ExceptionDefault(validator.Errors.Select(er => er.ErrorMessage).ToList());
+			throw new DefaultException(validator.Errors.Select(er => er.ErrorMessage).ToList());
 
 		var account = await repository.FindEmployeeByEmailAsync(request.Email);
 		if (account is null)
-			throw new ExceptionDefault([MessageException.EMAIL_NAO_ENCONTRADO]);
+			throw new DefaultException([MessageException.EMAIL_NAO_ENCONTRADO]);
 
 		if (!cryptographyService.VerifyPassword(request.Password, account.Password!))
-			throw new ExceptionDefault([MessageException.SENHA_INVALIDA]);
+			throw new DefaultException([MessageException.SENHA_INVALIDA]);
+		
+		if (account.IsDisabled)
+			throw new DefaultException([MessageException.CONTA_DESATIVADA]);
 
-		var session = redis.ValidateSessionAccountAsync(account.CompanyId.ToString());
+		var session = redis.ValidateSessionAccountAsync(account.EmployeeId.ToString());
 		if (session)
-			throw new ExceptionDefault([MessageException.SESSION_ATIVA]);
+			throw new DefaultException([MessageException.SESSION_ATIVA]);
 
 		redis.SetSessionAccountAsync(account.EmployeeId.ToString());
 

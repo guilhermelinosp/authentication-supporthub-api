@@ -1,6 +1,4 @@
-﻿using Customer.SupportHub.Infrastructure;
-
-namespace Company.SupportHub.Domain.Services;
+﻿namespace Company.SupportHub.Domain.Services;
 
 public interface ISendGridService
 {

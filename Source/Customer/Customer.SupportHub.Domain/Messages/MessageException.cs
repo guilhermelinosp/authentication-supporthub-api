@@ -17,6 +17,7 @@ public record MessageException
 	public static string CNPJ_NAO_PODE_SER_ATUALIZADO => "The CNPJ's cannot be updated";
 	public static string CNPJ_NAO_PODE_SER_BLOQUEADO => "The CNPJ's cannot be blocked";
 	public static string CNPJ_NAO_PODE_SER_DESBLOQUEADO => "The CNPJ's cannot be unblocked";
+	public static string CONTA_DESATIVADA => "Account deactivated.";
 
 
 	public static string USUARIO_BLOQUEADO => "User blocked.";

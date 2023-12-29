@@ -19,18 +19,18 @@ public class ResetPasswordUseCase(
 	{
 		var validatorRequest = await new ResetPasswordValidator().ValidateAsync(request);
 		if (!validatorRequest.IsValid)
-			throw new ExceptionDefault(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
+			throw new DefaultException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
 		var validatorCode = redis.ValidateOneTimePassword(accountId, code);
 		if (!validatorCode)
-			throw new ExceptionDefault([MessageException.CODIGO_INVALIDO]);
+			throw new DefaultException([MessageException.CODIGO_INVALIDO]);
 
 		var account = await repository.FindCustomerByIdAsync(Guid.Parse(accountId));
 		if (account is null)
-			throw new ExceptionDefault([MessageException.CONTA_NAO_ENCONTRADA]);
+			throw new DefaultException([MessageException.CONTA_NAO_ENCONTRADA]);
 
 		if (request.Password != request.PasswordConfirmation)
-			throw new ExceptionDefault([MessageException.SENHA_NAO_CONFERE]);
+			throw new DefaultException([MessageException.SENHA_NAO_CONFERE]);
 
 		account.Password = cryptography.EncryptPassword(request.Password!);
 

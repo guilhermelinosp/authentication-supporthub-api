@@ -1,4 +1,4 @@
-namespace Company.SupportHub.Domain.VOs;
+namespace Customer.SupportHub.Domain.VOs;
 
 public class SessionStorage
 {

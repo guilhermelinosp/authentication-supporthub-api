@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Customer.SupportHub.Infrastructure.Repositories;
 
-public class CustomerRepository(InfrastructureDbContext context) : ICustomerRepository, IInfrastructureInjection
+public class CustomerRepository(CustomerDbContext context) : ICustomerRepository, IInfrastructureInjection
 {
 	public async Task<Domain.Entities.Customer?> FindCustomerByIdAsync(Guid customerid)
 	{
-		return await context.Customers!.AsNoTracking().SingleOrDefaultAsync(u => u.CustomerId == customerid);
+		return await context.Customers!.AsNoTracking().FirstOrDefaultAsync(u => u.CustomerId == customerid);
 	}
 
 	public async Task<Domain.Entities.Customer?> FindCustomerByEmailAsync(string email)
 	{
-		return await context.Customers!.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email);
+		return await context.Customers!.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
 	}
 
 	public async Task UpdateCustomerAsync(Domain.Entities.Customer customer)

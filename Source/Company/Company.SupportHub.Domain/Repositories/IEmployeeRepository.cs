@@ -1,5 +1,4 @@
 ﻿using Company.SupportHub.Domain.Entities;
-using Customer.SupportHub.Infrastructure;
 
 namespace Company.SupportHub.Domain.Repositories;
 

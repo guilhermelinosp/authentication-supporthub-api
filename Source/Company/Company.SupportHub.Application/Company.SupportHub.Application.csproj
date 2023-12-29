@@ -20,8 +20,4 @@
         <ProjectReference Include="..\Company.SupportHub.Infrastructure\Company.SupportHub.Infrastructure.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="UseCases\Company\" />
-    </ItemGroup>
-
 </Project>

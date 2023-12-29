@@ -19,11 +19,11 @@ public class ForgotPasswordUseCase(
 	{
 		var validatorRequest = await new ForgotPasswordValidator().ValidateAsync(request);
 		if (!validatorRequest.IsValid)
-			throw new ExceptionDefault(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
+			throw new DefaultException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
 		var account = await repository.FindCompanyByEmailAsync(request.Email);
 		if (account is null)
-			throw new ExceptionDefault([MessageException.EMAIL_NAO_ENCONTRADO]);
+			throw new DefaultException([MessageException.EMAIL_NAO_ENCONTRADO]);
 
 		var code = redis.GenerateOneTimePassword(account.CompanyId.ToString());
 

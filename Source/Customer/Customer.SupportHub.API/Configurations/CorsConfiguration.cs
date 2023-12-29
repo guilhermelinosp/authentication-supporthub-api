@@ -2,13 +2,15 @@
 
 public static class CorsConfiguration
 {
-	public static void AddCorsConfiguration(this IServiceCollection services, IConfiguration configuration)
+	public static void AddCorsConfiguration(this IServiceCollection services)
 	{
 		services.AddCors(options =>
 		{
-			options.AddPolicy("Any", builder =>
+			options.AddDefaultPolicy(builder =>
 			{
-				builder.AllowAnyOrigin()
+				builder
+					.AllowAnyHeader()
+					.AllowCredentials()
 					.AllowAnyMethod()
 					.AllowAnyHeader();
 			});

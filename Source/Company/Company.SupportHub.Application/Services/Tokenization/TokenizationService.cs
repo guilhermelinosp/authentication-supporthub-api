@@ -34,7 +34,7 @@ public class TokenizationService(IConfiguration configuration) : ITokenizationSe
 		}
 		catch (SecurityTokenExpiredException)
 		{
-			throw new ExceptionDefault(new List<string> { MessageException.TOKEN_EXPIRADO });
+			throw new DefaultException(new List<string> { MessageException.TOKEN_EXPIRADO });
 		}
 		catch (Exception ex)
 		{

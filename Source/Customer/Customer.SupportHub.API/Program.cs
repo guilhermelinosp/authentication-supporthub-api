@@ -3,18 +3,14 @@ using Customer.SupportHub.API.Filters;
 using Customer.SupportHub.Application;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var configuration = builder.Configuration;
-
 var services = builder.Services;
 
 services.AddApplicationInjection(configuration);
-
-services.AddAuthorizationConfiguration(configuration);
 services.AddAuthenticationConfiguration(configuration);
-services.AddSwaggerConfiguration(configuration);
-services.AddRoutingConfiguration(configuration);
-services.AddCorsConfiguration(configuration);
+services.AddSwaggerConfiguration();
+services.AddRoutingConfiguration();
+services.AddCorsConfiguration();
 
 services.AddScoped<ExceptionFilter>();
 services.AddControllers(options => { options.Filters.AddService<ExceptionFilter>(); });
@@ -25,12 +21,16 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 	configuration.AddUserSecrets<Program>();
 }
+else
+{
+	app.UseHsts();
+	app.UseExceptionHandler("/error");
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("Any");
+app.UseCors();
 app.UseRouting();
-app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

@@ -8,7 +8,6 @@ var configuration = builder.Configuration;
 var services = builder.Services;
 
 services.AddApplicationInjection(configuration);
-
 services.AddAuthenticationConfiguration(configuration);
 services.AddSwaggerConfiguration();
 services.AddRoutingConfiguration();
@@ -31,7 +30,7 @@ else
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("Any");
+app.UseCors();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

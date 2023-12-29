@@ -13,9 +13,6 @@ public class BrazilApi(HttpClient httpClient) : IBrazilApi
 		using var request = await httpClient.SendAsync(
 			new HttpRequestMessage(HttpMethod.Get, $"/api/cnpj/v1/{cnpj}"));
 
-		if (!request.IsSuccessStatusCode)
-		{
-			throw new ExceptionDefault([MessageException.CNPJ_INVALIDO]);
-		}
+		if (!request.IsSuccessStatusCode) throw new DefaultException([MessageException.CNPJ_INVALIDO]);
 	}
 }

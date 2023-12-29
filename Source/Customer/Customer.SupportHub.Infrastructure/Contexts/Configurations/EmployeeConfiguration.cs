@@ -1,11 +1,12 @@
+using Customer.SupportHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Company.SupportHub.Infrastructure.Contexts.Configurations;
+namespace Customer.SupportHub.Infrastructure.Contexts.Configurations;
 
-public class EmployeeConfiguration : IEntityTypeConfiguration<Domain.Entities.Employee>
+public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
-	public void Configure(EntityTypeBuilder<Domain.Entities.Employee> builder)
+	public void Configure(EntityTypeBuilder<Employee> builder)
 	{
 		builder.HasKey(employee => employee.EmployeeId);
 	}

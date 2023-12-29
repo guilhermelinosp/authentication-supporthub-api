@@ -7,6 +7,7 @@ namespace Customer.SupportHub.Domain.Entities;
 public class Customer
 {
 	[Key] public Guid CustomerId { get; set; } = Guid.NewGuid();
+	public required string Cnpj { get; set; }
 	public required string Email { get; set; }
 	public required string Password { get; set; }
 	public string Phone { get; set; } = string.Empty;

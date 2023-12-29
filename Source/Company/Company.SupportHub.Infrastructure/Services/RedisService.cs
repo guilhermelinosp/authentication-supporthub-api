@@ -13,10 +13,9 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 
 		var otp = new Random().Next(100000, 999999).ToString();
 
-		var otpObject = new OneTimePassword { Code = otp };
-		var otpJson = JsonConvert.SerializeObject(otpObject);
+		var jsonSerialize = JsonConvert.SerializeObject(new OneTimePassword { Code = otp });
 
-		redisDb.StringSet($"OTP-{accountId}", otpJson, TimeSpan.FromMinutes(5));
+		redisDb.StringSet($"OTP-{accountId}", jsonSerialize, TimeSpan.FromMinutes(5));
 
 		return otp;
 	}
@@ -24,43 +23,44 @@ public class RedisService(IConnectionMultiplexer redisConnection) : IRedisServic
 	public bool ValidateOneTimePassword(string accountId, string otpCode)
 	{
 		var redisDb = redisConnection.GetDatabase();
-		var storedOtpJson = redisDb.StringGet($"OTP-{accountId}");
 
-		if (string.IsNullOrEmpty(storedOtpJson)) return false;
+		var json = redisDb.StringGet($"OTP-{accountId}");
 
-		var storedOtp = JsonConvert.DeserializeObject<OneTimePassword>(storedOtpJson!);
+		if (string.IsNullOrEmpty(json)) return false;
 
-		return storedOtp?.Code == otpCode;
+		var jsonSerialize = JsonConvert.DeserializeObject<OneTimePassword>(json!);
+
+		return jsonSerialize?.Code == otpCode;
 	}
 
 	public void SetSessionAccountAsync(string accountId)
 	{
 		var redisDb = redisConnection.GetDatabase();
 
-		var session = JsonConvert.SerializeObject(new SessionStorage { SessionIsActive = true });
+		var jsonSerialize = JsonConvert.SerializeObject(new SessionStorage { SessionIsActive = true });
 
-		redisDb.StringSet($"S-{accountId}", session, TimeSpan.FromMinutes(720));
+		redisDb.StringSet($"S-{accountId}", jsonSerialize, TimeSpan.FromMinutes(720));
 	}
 
 	public void OutSessionAccountAsync(string accountId)
 	{
 		var redisDb = redisConnection.GetDatabase();
 
-		var session = JsonConvert.SerializeObject(new SessionStorage { SessionIsActive = false });
+		var jsonSerialize = JsonConvert.SerializeObject(new SessionStorage { SessionIsActive = false });
 
-		redisDb.StringSet($"S-{accountId}", session, TimeSpan.FromMinutes(720));
+		redisDb.StringSet($"S-{accountId}", jsonSerialize, TimeSpan.FromMinutes(720));
 	}
 
 	public bool ValidateSessionAccountAsync(string accountId)
 	{
 		var redisDb = redisConnection.GetDatabase();
 
-		var sessionJson = redisDb.StringGet($"S-{accountId}");
+		var json = redisDb.StringGet($"S-{accountId}");
 
-		if (string.IsNullOrEmpty(sessionJson)) return false;
+		if (string.IsNullOrEmpty(json)) return false;
 
-		var storedSession = JsonConvert.DeserializeObject<SessionStorage>(sessionJson!);
+		var jsonSerialize = JsonConvert.DeserializeObject<SessionStorage>(json!);
 
-		return storedSession!.SessionIsActive;
+		return jsonSerialize!.SessionIsActive;
 	}
 }

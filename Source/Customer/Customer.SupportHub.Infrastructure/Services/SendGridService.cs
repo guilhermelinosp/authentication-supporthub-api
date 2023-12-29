@@ -5,7 +5,7 @@ using SendGrid.Helpers.Mail;
 
 namespace Customer.SupportHub.Infrastructure.Services;
 
-public class SendGridService(IConfiguration configuration) : ISendGridService
+public class SendGridService(IConfiguration configuration) : ISendGridService, IInfrastructureInjection
 {
 	public async Task SendSignUpAsync(string email, string code)
 	{

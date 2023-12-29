@@ -23,20 +23,20 @@ public class SignUpUseCase(
 	{
 		var validatorRequest = await new SignUpValidator().ValidateAsync(request);
 		if (!validatorRequest.IsValid)
-			throw new ExceptionDefault(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
+			throw new DefaultException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
 		var validateEmail = await repository.FindCompanyByEmailAsync(request.Email);
 		if (validateEmail is not null)
-			throw new ExceptionDefault([MessageException.EMAIL_JA_REGISTRADO]);
+			throw new DefaultException([MessageException.EMAIL_JA_REGISTRADO]);
 
 		var validateCnpj = await repository.FindCompanyByCnpjAsync(request.Cnpj);
 		if (validateCnpj is not null)
-			throw new ExceptionDefault([MessageException.CNPJ_JA_REGISTRADO]);
+			throw new DefaultException([MessageException.CNPJ_JA_REGISTRADO]);
 
 		await brazilApi.ConsultaCnpj(request.Cnpj);
 
 		if (request.Password != request.PasswordConfirmation)
-			throw new ExceptionDefault([MessageException.SENHA_NAO_CONFERE]);
+			throw new DefaultException([MessageException.SENHA_NAO_CONFERE]);
 
 		var company = new Domain.Entities.Company
 		{

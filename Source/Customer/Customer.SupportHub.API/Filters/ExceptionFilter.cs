@@ -11,7 +11,7 @@ public class ExceptionFilter : IExceptionFilter
 {
 	public void OnException(ExceptionContext context)
 	{
-		if (context.Exception is ExceptionDefault exception)
+		if (context.Exception is DefaultException exception)
 			context.Result = new ObjectResult(new { data = new ResponseException(exception.ErrorMessages!.ToList()) })
 			{
 				StatusCode = (int)HttpStatusCode.BadRequest

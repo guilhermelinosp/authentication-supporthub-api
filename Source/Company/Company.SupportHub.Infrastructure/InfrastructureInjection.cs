@@ -28,19 +28,17 @@ public static class InfrastructureInjection
 
 	private static void AddRedis(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddStackExchangeRedisCache(options =>
-		{
-			options.Configuration = configuration["Redis_ConnectionString"];
-		});
-
 		services.AddSingleton<IConnectionMultiplexer>(_ =>
 			ConnectionMultiplexer.Connect(configuration["Redis_ConnectionString"]!));
 	}
 
 	private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddDbContext<InfrastructureDbContext>(options =>
-			options.UseSqlServer(configuration["SqlServer_ConnectionString"]));
+		services.AddDbContext<CompanyDbContext>(options =>
+			options.UseSqlServer(configuration["SqlServer_ConnectionString"], sqlServerOptions =>
+			{
+				sqlServerOptions.EnableRetryOnFailure();
+			}));
 	}
 
 	private static void AddHttpClient(this IServiceCollection services, IConfiguration configuration)
