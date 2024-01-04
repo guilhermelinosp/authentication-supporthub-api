@@ -1,5 +1,3 @@
-name: 'dotnet-dependency-review'
-
 on:
   push:
     branches: ["main"]
@@ -30,3 +28,5 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           retry-on-snapshot-warnings: false
           retry-on-snapshot-warnings-timeout: 120
+          base_ref: ${{ github.event.before }}
+          head_ref: ${{ github.sha }}
