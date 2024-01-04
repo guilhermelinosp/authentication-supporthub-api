@@ -1,11 +1,10 @@
+name: dependency-review
 on:
-  push:
-    branches: ["main"]
   pull_request:
     branches: ["main"]
 
 jobs:
-  dotnet-dependency-review:
+  dependency-review:
     runs-on: ${{ matrix.os }}
     
     strategy:
@@ -24,9 +23,5 @@ jobs:
 
       - name: 'Run Dependency Review'
         uses: actions/dependency-review-action@v3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          retry-on-snapshot-warnings: false
-          retry-on-snapshot-warnings-timeout: 120
-          base_ref: ${{ github.event.before }}
-          head_ref: ${{ github.sha }}
+
+ 
