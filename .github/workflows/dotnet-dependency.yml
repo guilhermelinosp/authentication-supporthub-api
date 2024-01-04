@@ -1,8 +1,6 @@
-name: 'Dependency Review'
+name: 'dotnet-dependency.yml'
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
     branches: ["main"]
 
@@ -12,9 +10,9 @@ jobs:
     
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
         dotnet-version: [6.0.x, 7.0.x, 8.0.x]
-
+        
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v4
@@ -28,4 +26,4 @@ jobs:
         run: dotnet restore
 
       - name: 'Run Dependency Review'
-        uses: actions/dependency-review-action@v3
+        uses: actions/dependency-review-action@v4
