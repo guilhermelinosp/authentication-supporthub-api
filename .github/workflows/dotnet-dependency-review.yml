@@ -1,4 +1,4 @@
-name: 'dotnet-dependency-review.yml'
+name: 'dotnet-dependency-review'
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-  Dependency-Review:
+  dotnet-dependency-review:
     runs-on: ${{ matrix.os }}
     
     strategy:
@@ -26,3 +26,7 @@ jobs:
 
       - name: 'Run Dependency Review'
         uses: actions/dependency-review-action@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          retry-on-snapshot-warnings: false
+          retry-on-snapshot-warnings-timeout: 120
