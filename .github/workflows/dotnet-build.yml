@@ -1,11 +1,11 @@
-name: 'dotnet-build.yml'
-
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
-  Build:
+  dotnet-build:
     runs-on: ${{ matrix.os }}
 
     strategy:
