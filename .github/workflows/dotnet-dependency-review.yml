@@ -1,4 +1,4 @@
-name: 'dotnet-dependency.yml'
+name: 'dotnet-dependency-review.yml'
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-  dependency-review:
+  Dependency-Review:
     runs-on: ${{ matrix.os }}
     
     strategy:
@@ -25,4 +25,4 @@ jobs:
         run: dotnet restore
 
       - name: 'Run Dependency Review'
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v
