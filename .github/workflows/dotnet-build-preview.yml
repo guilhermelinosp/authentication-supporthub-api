@@ -1,3 +1,4 @@
+name: Build Preview
 on:
   push:
     branches: ["main"]
@@ -5,7 +6,7 @@ on:
     branches: ["main"]
 
 jobs:
-  dotnet-build:
+  dotnet-build-preview:
     runs-on: ${{ matrix.os }}
 
     strategy:
