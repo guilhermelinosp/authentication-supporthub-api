@@ -1,4 +1,4 @@
-name: dependency-review
+name: dotnet-dependency
 on:
   pull_request:
     branches: ["main"]
@@ -6,11 +6,11 @@ on:
 jobs:
   dependency-review:
     runs-on: ${{ matrix.os }}
-    
+
     strategy:
       matrix:
         os: [ubuntu-latest]
-        
+
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v4
@@ -24,4 +24,4 @@ jobs:
       - name: 'Run Dependency Review'
         uses: actions/dependency-review-action@v3
 
- 
+

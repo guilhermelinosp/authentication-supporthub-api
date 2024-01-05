@@ -1,4 +1,4 @@
-name: Build Preview
+name: dotnet-build
 on:
   push:
     branches: ["main"]
@@ -6,7 +6,7 @@ on:
     branches: ["main"]
 
 jobs:
-  dotnet-build-preview:
+  build-review:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
     - name: 'Setup .NET'
       uses: actions/setup-dotnet@v4
 
