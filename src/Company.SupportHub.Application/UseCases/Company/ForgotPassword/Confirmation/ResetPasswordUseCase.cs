@@ -32,7 +32,7 @@ public class ResetPasswordUseCase(
 		if (request.Password != request.PasswordConfirmation)
 			throw new DefaultException([MessageException.SENHA_NAO_CONFERE]);
 
-		account.Password = cryptography.EncryptPassword(request.Password!);
+		account.Password = cryptography.EncryptPassword(request.Password);
 
 		await repository.UpdateCompanyAsync(account);
 
