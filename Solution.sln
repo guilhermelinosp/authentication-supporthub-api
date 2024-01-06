@@ -3,29 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ADDB513C-3C81-4BF7-8FE5-BD3E65204E03}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{ADDB513C-3C81-4BF7-8FE5-BD3E65204E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.API", "src\Company.SupportHub.API\Company.SupportHub.API.csproj", "{9C784328-8C64-4209-8EAB-3259B74BD29F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.API", "Source\Company.SupportHub.API\Company.SupportHub.API.csproj", "{9C784328-8C64-4209-8EAB-3259B74BD29F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6BEC8C1-7292-411E-A055-CE817215E7E6} = {B6BEC8C1-7292-411E-A055-CE817215E7E6}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.Application", "src\Company.SupportHub.Application\Company.SupportHub.Application.csproj", "{B6BEC8C1-7292-411E-A055-CE817215E7E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.Application", "Source\Company.SupportHub.Application\Company.SupportHub.Application.csproj", "{B6BEC8C1-7292-411E-A055-CE817215E7E6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{94B268D4-1C7A-441B-8D42-67395352443F} = {94B268D4-1C7A-441B-8D42-67395352443F}
 		{7CA30D0A-E931-45D6-992B-0C521515AD95} = {7CA30D0A-E931-45D6-992B-0C521515AD95}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.Domain", "src\Company.SupportHub.Domain\Company.SupportHub.Domain.csproj", "{94B268D4-1C7A-441B-8D42-67395352443F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.Domain", "Source\Company.SupportHub.Domain\Company.SupportHub.Domain.csproj", "{94B268D4-1C7A-441B-8D42-67395352443F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.Infrastructure", "src\Company.SupportHub.Infrastructure\Company.SupportHub.Infrastructure.csproj", "{7CA30D0A-E931-45D6-992B-0C521515AD95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.Infrastructure", "Source\Company.SupportHub.Infrastructure\Company.SupportHub.Infrastructure.csproj", "{7CA30D0A-E931-45D6-992B-0C521515AD95}"
 	ProjectSection(ProjectDependencies) = postProject
 		{94B268D4-1C7A-441B-8D42-67395352443F} = {94B268D4-1C7A-441B-8D42-67395352443F}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2CE2DF91-81BC-49E5-AA4B-9522DA95B1F4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2CE2DF91-81BC-49E5-AA4B-9522DA95B1F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.UnitTest", "tests\Company.SupportHub.UnitTest\Company.SupportHub.UnitTest.csproj", "{60DEF27C-21BC-432F-AEA2-444D16DE48E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.UnitTesting", "Tests\Company.SupportHub.UnitTesting\Company.SupportHub.UnitTesting.csproj", "{60DEF27C-21BC-432F-AEA2-444D16DE48E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.SupportHub.IntegrationTesting", "Tests\Company.SupportHub.IntegrationTesting\Company.SupportHub.IntegrationTesting.csproj", "{ACBE9441-75BE-461E-A6AB-D8CBDAE2D804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,7 @@ Global
 		{94B268D4-1C7A-441B-8D42-67395352443F} = {ADDB513C-3C81-4BF7-8FE5-BD3E65204E03}
 		{7CA30D0A-E931-45D6-992B-0C521515AD95} = {ADDB513C-3C81-4BF7-8FE5-BD3E65204E03}
 		{60DEF27C-21BC-432F-AEA2-444D16DE48E5} = {2CE2DF91-81BC-49E5-AA4B-9522DA95B1F4}
+		{ACBE9441-75BE-461E-A6AB-D8CBDAE2D804} = {2CE2DF91-81BC-49E5-AA4B-9522DA95B1F4}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9C784328-8C64-4209-8EAB-3259B74BD29F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -63,5 +66,9 @@ Global
 		{60DEF27C-21BC-432F-AEA2-444D16DE48E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60DEF27C-21BC-432F-AEA2-444D16DE48E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60DEF27C-21BC-432F-AEA2-444D16DE48E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBE9441-75BE-461E-A6AB-D8CBDAE2D804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBE9441-75BE-461E-A6AB-D8CBDAE2D804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBE9441-75BE-461E-A6AB-D8CBDAE2D804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBE9441-75BE-461E-A6AB-D8CBDAE2D804}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

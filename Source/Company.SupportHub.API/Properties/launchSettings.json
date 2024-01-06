@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "HTTPS": {
+    "HTTP": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
