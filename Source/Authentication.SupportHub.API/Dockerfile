@@ -7,20 +7,20 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Source/Company/Company.SupportHub.API/Company.SupportHub.API.csproj", "Source/Company/Company.SupportHub.API/"]
-COPY ["Source/Company/Company.SupportHub.Application/Company.SupportHub.Application.csproj", "Source/Company/Company.SupportHub.Application/"]
-COPY ["Source/Company/Company.SupportHub.Domain/Company.SupportHub.Domain.csproj", "Source/Company/Company.SupportHub.Domain/"]
-COPY ["Source/Company/Company.SupportHub.Infrastructure/Company.SupportHub.Infrastructure.csproj", "Source/Company/Company.SupportHub.Infrastructure/"]
-RUN dotnet restore "Source/Company/Company.SupportHub.API/Company.SupportHub.API.csproj"
+COPY ["Source/Authentication.SupportHub.API/Authentication.SupportHub.API.csproj", "Source/Authentication.SupportHub.API/"]
+COPY ["Source/Authentication.SupportHub.Application/Authentication.SupportHub.Application.csproj", "Source/Authentication.SupportHub.Application/"]
+COPY ["Source/Authentication.SupportHub.Domain/Authentication.SupportHub.Domain.csproj", "Source/Authentication.SupportHub.Domain/"]
+COPY ["Source/Authentication.SupportHub.Infrastructure/Authentication.SupportHub.Infrastructure.csproj", "Source/Authentication.SupportHub.Infrastructure/"]
+RUN dotnet restore "Source/Authentication.SupportHub.API/Authentication.SupportHub.API.csproj"
 COPY . .
-WORKDIR "/src/Source/Company/Company.SupportHub.API"
-RUN dotnet build "Company.SupportHub.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Source/Authentication.SupportHub.API"
+RUN dotnet build "Authentication.SupportHub.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Company.SupportHub.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Authentication.SupportHub.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Company.SupportHub.API.dll"]
+ENTRYPOINT ["dotnet", "Authentication.SupportHub.API.dll"]

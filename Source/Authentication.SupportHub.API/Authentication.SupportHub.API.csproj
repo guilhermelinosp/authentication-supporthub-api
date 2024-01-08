@@ -6,8 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>false</InvariantGlobalization>
         <UserSecretsId>a1bb7188-9943-471d-9a93-0040ec6c5066</UserSecretsId>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <RootNamespace>Authentication.SupportHub.API</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,9 +30,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
+
 
 </Project>

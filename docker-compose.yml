@@ -1,0 +1,24 @@
+﻿services:
+  authentication.supporthub.api:
+    container_name: authentication.supporthub.api
+    image: authentication.supporthub.api:latest
+    build:
+      context: .
+      dockerfile: Source/Authentication.SupportHub.API/Dockerfile
+    ports:
+        - "8080:8080"
+        - "8081:8081"
+    entrypoint: 
+      - ConnectionStrings__SqlServer=
+      - ConnectionStrings__Redis=Server=
+      - Jwt__Secret=
+      - Jwt__Expiry=
+      - Jwt__Audience=
+      - Jwt__Issuer=
+      - SendGrid__ApiKey=
+      - SendGrid__FromEmail=
+      - SendGrid__FromName=
+      - Twilio__AccountSID=
+      - Twilio__AuthToken=
+      - Twilio__FromNumber=
+      - BrazilApi__Url=
