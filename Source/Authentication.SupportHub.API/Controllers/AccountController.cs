@@ -1,14 +1,16 @@
 using System.Net;
 using Authentication.SupportHub.API.Controllers.Abstract;
 using Authentication.SupportHub.Application.UseCases.Account.ForgotPassword;
-using Authentication.SupportHub.Application.UseCases.Account.ForgotPassword.Confirmation;
+using Authentication.SupportHub.Application.UseCases.Account.ResetPassword;
 using Authentication.SupportHub.Application.UseCases.Account.SignIn;
 using Authentication.SupportHub.Application.UseCases.Account.SignIn.Confirmation;
+using Authentication.SupportHub.Application.UseCases.Account.SignOut;
 using Authentication.SupportHub.Application.UseCases.Account.SignUp;
 using Authentication.SupportHub.Application.UseCases.Account.SignUp.Confirmation;
 using Authentication.SupportHub.Domain.DTOs.Requests;
 using Authentication.SupportHub.Domain.DTOs.Responses;
-using Authentication.SupportHub.Application.UseCases.Employee.SignOut;
+using Authentication.SupportHub.Domain.Exceptions;
+using Authentication.SupportHub.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -29,7 +31,7 @@ public class AccountController(
 	IResetPasswordUseCase resetPassword) : Controller
 {
 	[HttpPost("signup")]
-	public async Task<BaseActionResult<ResponseDefault>> SignUpRequest([FromBody] RequestSignUp request)
+	public async Task<BaseActionResult<ResponseDefault>> SignUpRequest([FromBody] RequestSignUpAccount request)
 	{
 		var response = await signUp.ExecuteAsync(request);
 		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
@@ -44,7 +46,7 @@ public class AccountController(
 	}
 
 	[HttpPost("signin")]
-	public async Task<BaseActionResult<ResponseDefault>> SignInRequest([FromBody] RequestSignInCompany request)
+	public async Task<BaseActionResult<ResponseDefault>> SignInRequest([FromBody] RequestSignInAccount request)
 	{
 		var response = await signIn.ExecuteAsync(request);
 		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
@@ -59,13 +61,6 @@ public class AccountController(
 		return new BaseActionResult<ResponseToken>(HttpStatusCode.OK, response);
 	}
 
-	[HttpGet("signout")]
-	public async Task<BaseActionResult<ResponseDefault>> SignOutRequest()
-	{
-		var token = Request.Headers.Authorization.ToString().Split(" ")[1];
-		var response = await signOut.ExecuteAsync(token);
-		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
-	}
 
 	[HttpPost("forgot-password")]
 	public async Task<BaseActionResult<ResponseDefault>> ForgotPasswordRequest([FromBody] RequestForgotPassword request)
@@ -74,11 +69,21 @@ public class AccountController(
 		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
 	}
 
-	[HttpPost("forgot-password/{accountId}/{otp}")]
+	[HttpPost("reset-password/{accountId}/{otp}")]
 	public async Task<BaseActionResult<ResponseDefault>> ResetPasswordRequest([FromBody] RequestResetPassword request,
 		[FromRoute] string accountId, [FromRoute] string otp)
 	{
 		var responde = await resetPassword.ExecuteAsync(request, accountId, otp);
 		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, responde);
+	}
+
+	[HttpGet("signout")]
+	public async Task<BaseActionResult<ResponseDefault>> SignOutRequest()
+	{
+		var token = Request.Headers.Authorization.ToString().Split(" ")[1];
+		if (string.IsNullOrWhiteSpace(token)) throw new DefaultException([MessageException.TOKEN_NAO_INFORMADO]);
+
+		var response = await signOut.ExecuteAsync(token);
+		return new BaseActionResult<ResponseDefault>(HttpStatusCode.OK, response);
 	}
 }

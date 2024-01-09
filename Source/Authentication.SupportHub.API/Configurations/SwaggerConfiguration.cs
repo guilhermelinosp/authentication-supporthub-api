@@ -12,9 +12,9 @@ public static class SwaggerConfiguration
 		{
 			opt.SwaggerDoc("v1", new OpenApiInfo
 			{
-				Title = "Account Support Hub API - Authentication",
+				Title = "Authentication Support Hub API",
 				Version = "v1",
-				Description = "Welcome to the Account Support Hub API...",
+				Description = "Welcome to the Authentication Support Hub API...",
 				Contact = new OpenApiContact
 				{
 					Name = "Support Hub",

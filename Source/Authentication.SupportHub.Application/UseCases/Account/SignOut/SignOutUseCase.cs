@@ -3,7 +3,7 @@ using Authentication.SupportHub.Domain.DTOs.Responses;
 using Authentication.SupportHub.Domain.Messages;
 using Authentication.SupportHub.Domain.Services;
 
-namespace Authentication.SupportHub.Application.UseCases.Employee.SignOut;
+namespace Authentication.SupportHub.Application.UseCases.Account.SignOut;
 
 public class SignOutUseCase(
 	IRedisService redis,
@@ -16,6 +16,10 @@ public class SignOutUseCase(
 
 		redis.OutSessionStorageAsync(accountId.ToString());
 
-		return Task.FromResult(new ResponseDefault(accountId.ToString(), MessageResponse.SIGN_OUT_CONFIRMADO));
+		return Task.FromResult(new ResponseDefault
+		{
+			Message = MessageResponse.SIGN_OUT_CONFIRMADO,
+			AccountId = accountId.ToString()
+		});
 	}
 }

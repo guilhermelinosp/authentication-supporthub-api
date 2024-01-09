@@ -6,7 +6,7 @@ using Twilio.Types;
 
 namespace Authentication.SupportHub.Infrastructure.Services;
 
-public class TwilioService(IConfiguration configuration) : ITwilioService, IInfrastructureInjection
+public class TwilioService(IConfiguration configuration) : ITwilioService
 {
 	public async Task SendSignInAsync(string phone, string code)
 	{

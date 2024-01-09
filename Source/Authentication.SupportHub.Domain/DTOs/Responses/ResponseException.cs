@@ -1,6 +1,6 @@
 ﻿namespace Authentication.SupportHub.Domain.DTOs.Responses;
 
-public class ResponseException(List<string> mensagem)
+public class ResponseException
 {
-	public List<string> Mensagens { get; set; } = mensagem;
+	public required List<string> Mensagens { get; set; }
 }

@@ -27,11 +27,15 @@ public class ForgotPasswordUseCase(
 
 		var code = redis.GenerateOneTimePassword(account.AccountId.ToString());
 
-		if (account.Is2FaEnabled)
+		if (account.Is2Fa)
 			await twilioService.SendSignInAsync(account.Phone, code);
 		else
 			await sendGridService.SendSignInAsync(request.Email, code);
 
-		return new ResponseDefault(account.AccountId.ToString(), MessageResponse.CODIGO_ENVIADO);
+		return new ResponseDefault
+		{
+			Message = MessageResponse.CODIGO_ENVIADO,
+			AccountId = account.AccountId.ToString()
+		};
 	}
 }

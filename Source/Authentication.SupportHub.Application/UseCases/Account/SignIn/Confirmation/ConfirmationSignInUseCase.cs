@@ -20,12 +20,20 @@ public class ConfirmationSignInUseCase(
 		if (!validatorCode)
 			throw new DefaultException([MessageException.CODIGO_INVALIDO]);
 
+		redis.SetSessionStorageAsync(accountId);
+
+		var token = tokenizationService.GenerateToken(accountId);
+
+		var refreshToken = tokenizationService.GenerateRefreshToken();
+
+		var expiryDate =
+			DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt:Expiry"]!, CultureInfo.InvariantCulture));
+
 		return new ResponseToken
 		{
-			Token = tokenizationService.GenerateToken(accountId),
-			RefreshToken = tokenizationService.GenerateRefreshToken(),
-			ExpiryDate =
-				DateTime.UtcNow.Add(TimeSpan.Parse(configuration["Jwt:Expiry"]!, CultureInfo.InvariantCulture))
+			Token = token,
+			RefreshToken = refreshToken,
+			ExpiryDate = expiryDate
 		};
 	}
 }

@@ -3,7 +3,7 @@ using Authentication.SupportHub.Domain.DTOs.Responses;
 
 namespace Authentication.SupportHub.Application.UseCases.Account.SignUp;
 
-public interface ISignUpUseCase : IApplicationInjection
+public interface ISignUpUseCase
 {
-	Task<ResponseDefault> ExecuteAsync(RequestSignUp request);
+	Task<ResponseDefault> ExecuteAsync(RequestSignUpAccount request);
 }

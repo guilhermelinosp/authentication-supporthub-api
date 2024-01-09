@@ -3,7 +3,7 @@ using Authentication.SupportHub.Domain.DTOs.Responses;
 
 namespace Authentication.SupportHub.Application.UseCases.Account.SignIn;
 
-public interface ISignInUseCase : IApplicationInjection
+public interface ISignInUseCase
 {
-	Task<ResponseDefault> ExecuteAsync(RequestSignInCompany request);
+	Task<ResponseDefault> ExecuteAsync(RequestSignInAccount request);
 }

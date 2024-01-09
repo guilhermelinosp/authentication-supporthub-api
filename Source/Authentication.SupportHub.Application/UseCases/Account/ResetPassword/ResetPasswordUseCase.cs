@@ -7,7 +7,7 @@ using Authentication.SupportHub.Domain.Messages;
 using Authentication.SupportHub.Domain.Repositories;
 using Authentication.SupportHub.Domain.Services;
 
-namespace Authentication.SupportHub.Application.UseCases.Account.ForgotPassword.Confirmation;
+namespace Authentication.SupportHub.Application.UseCases.Account.ResetPassword;
 
 public class ResetPasswordUseCase(
 	IAccountRepository repository,
@@ -36,6 +36,10 @@ public class ResetPasswordUseCase(
 
 		await repository.UpdateAccountAsync(account);
 
-		return new ResponseDefault(accountId, MessageResponse.SENHA_RESETADA);
+		return new ResponseDefault
+		{
+			Message = MessageResponse.SENHA_RESETADA,
+			AccountId = accountId
+		};
 	}
 }

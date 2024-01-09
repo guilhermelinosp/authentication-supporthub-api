@@ -6,9 +6,9 @@
       context: .
       dockerfile: Source/Authentication.SupportHub.API/Dockerfile
     ports:
-        - "8080:8080"
-        - "8081:8081"
-    entrypoint: 
+      - "8080:8080"
+      - "8081:8081"
+    entrypoint:
       - ConnectionStrings__SqlServer=
       - ConnectionStrings__Redis=Server=
       - Jwt__Secret=

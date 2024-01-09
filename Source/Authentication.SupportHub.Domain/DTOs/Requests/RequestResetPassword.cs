@@ -1,7 +1,7 @@
 ﻿namespace Authentication.SupportHub.Domain.DTOs.Requests;
 
-public class RequestResetPassword(string password, string passwordConfirmation)
+public class RequestResetPassword
 {
-	public required string Password { get; set; } = password;
-	public required string PasswordConfirmation { get; set; } = passwordConfirmation;
+	public required string Password { get; set; }
+	public required string PasswordConfirmation { get; set; }
 }

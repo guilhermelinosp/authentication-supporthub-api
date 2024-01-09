@@ -6,7 +6,7 @@ using FluentValidation.Results;
 
 namespace Authentication.SupportHub.Application.UseCases.Validators;
 
-public partial class ValidatorSignInAccount : AbstractValidator<RequestSignInCompany>
+public partial class ValidatorSignInAccount : AbstractValidator<RequestSignInAccount>
 {
 	public ValidatorSignInAccount()
 	{
@@ -19,25 +19,29 @@ public partial class ValidatorSignInAccount : AbstractValidator<RequestSignInCom
 			.WithMessage(MessageException.SENHA_MAXIMO_DEZESSEIS_CARACTERES)
 			.Custom((password, validator) =>
 			{
-				if (!MyRegex().IsMatch(password))
-					validator.AddFailure(new ValidationFailure(nameof(RequestSignInEmployee.Password),
+				if (!RegexPassword().IsMatch(password))
+					validator.AddFailure(new ValidationFailure(nameof(RequestSignInAccount.Password),
 						MessageException.SENHA_INVALIDA));
 			});
 
-		RuleFor(c => c.Cnpj)
+		RuleFor(c => c.Identity)
 			.NotEmpty()
-			.WithMessage(MessageException.CNPJ_NAO_INFORMADO)
+			.WithMessage(MessageException.IDENTITY_NAO_INFORMADO)
+			.MaximumLength(14)
+			.WithMessage(MessageException.IDENTITY_MAXIMO_QUATORZE_CARACTERES)
+			.MinimumLength(11)
+			.WithMessage(MessageException.IDENTITY_MINIMO_ONZE_CARACTERES)
 			.Custom((cnpj, validator) =>
 			{
-				if (!RegexCnpj().IsMatch(cnpj))
-					validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Cnpj),
-						MessageException.CNPJ_INVALIDO));
+				if (!RegexIdentity().IsMatch(cnpj))
+					validator.AddFailure(new ValidationFailure(nameof(RequestSignInAccount.Identity),
+						MessageException.IDENTITY_INVALIDO));
 			});
 	}
 
 	[GeneratedRegex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$")]
-	private static partial Regex MyRegex();
+	private static partial Regex RegexPassword();
 
-	[GeneratedRegex(@"^\d{14}$")]
-	private static partial Regex RegexCnpj();
+	[GeneratedRegex(@"^\d+$")]
+	private static partial Regex RegexIdentity();
 }

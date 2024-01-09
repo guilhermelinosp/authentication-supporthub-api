@@ -5,7 +5,7 @@ using Authentication.SupportHub.Domain.Services;
 
 namespace Authentication.SupportHub.Infrastructure.Services;
 
-public class SendGridService(IConfiguration configuration) : ISendGridService, IInfrastructureInjection
+public class SendGridService(IConfiguration configuration) : ISendGridService
 {
 	public async Task SendSignUpAsync(string email, string code)
 	{

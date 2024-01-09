@@ -1,6 +1,6 @@
-﻿namespace Authentication.SupportHub.Domain.APIs;
+namespace Authentication.SupportHub.Domain.APIs;
 
 public interface IBrazilApi
 {
-	Task<bool> ConsultaCnpj(string cnpj);
+	Task<bool> Consultation(string cnpj);
 }

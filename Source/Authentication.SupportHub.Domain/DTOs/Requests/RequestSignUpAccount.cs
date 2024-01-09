@@ -1,6 +1,6 @@
 ﻿namespace Authentication.SupportHub.Domain.DTOs.Requests;
 
-public class RequestSignUp
+public class RequestSignUpAccount
 {
 	public required string Cnpj { get; set; }
 	public required string Email { get; set; }

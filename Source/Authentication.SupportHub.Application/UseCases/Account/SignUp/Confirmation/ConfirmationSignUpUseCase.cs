@@ -1,4 +1,5 @@
-﻿using Authentication.SupportHub.Domain.DTOs.Responses;
+﻿using Authentication.SupportHub.Domain.DTOs.Requests;
+using Authentication.SupportHub.Domain.DTOs.Responses;
 using Authentication.SupportHub.Domain.Exceptions;
 using Authentication.SupportHub.Domain.Messages;
 using Authentication.SupportHub.Domain.Repositories;
@@ -25,6 +26,10 @@ public class ConfirmationSignUpUseCase(
 
 		await repository.UpdateAccountAsync(account);
 
-		return new ResponseDefault(accountId, MessageResponse.CODIGO_CONFIRMADO);
+		return new ResponseDefault
+		{
+			Message = MessageResponse.CODIGO_CONFIRMADO,
+			AccountId = account.AccountId.ToString()
+		};
 	}
 }

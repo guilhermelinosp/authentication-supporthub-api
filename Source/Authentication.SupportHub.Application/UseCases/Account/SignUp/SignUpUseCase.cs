@@ -18,41 +18,44 @@ public class SignUpUseCase(
 	IRedisService redis)
 	: ISignUpUseCase
 {
-	public async Task<ResponseDefault> ExecuteAsync(RequestSignUp request)
+	public async Task<ResponseDefault> ExecuteAsync(RequestSignUpAccount request)
 	{
 		var validatorRequest = await new ValidatorSignUpAccount().ValidateAsync(request);
 		if (!validatorRequest.IsValid)
 			throw new DefaultException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
+		var checkCnpj = await brazilApi.Consultation(request.Cnpj);
+		if (!checkCnpj)
+			throw new DefaultException([MessageException.IDENTITY_INVALIDO]);
+
+		var validateCnpj = await repository.FindAccountByIdentityAsync(request.Cnpj);
+		if (validateCnpj is not null)
+			throw new DefaultException([MessageException.IDENTITY_JA_REGISTRADO]);
+
 		var validateEmail = await repository.FindAccountByEmailAsync(request.Email);
 		if (validateEmail is not null)
 			throw new DefaultException([MessageException.EMAIL_JA_REGISTRADO]);
 
-		var validateCnpj = await repository.FindAccountByCnpjAsync(request.Cnpj);
-		if (validateCnpj is not null)
-			throw new DefaultException([MessageException.CNPJ_JA_REGISTRADO]);
-
-		var checkCnpj = await brazilApi.ConsultaCnpj(request.Cnpj);
-		if (!checkCnpj)
-			throw new DefaultException([MessageException.CNPJ_INVALIDO]);
-
 		if (request.Password != request.PasswordConfirmation)
 			throw new DefaultException([MessageException.SENHA_NAO_CONFERE]);
 
-		var company = new Domain.Entities.Account
+		var account = new Domain.Entities.Account
 		{
-			Cnpj = request.Cnpj,
-			Phone = string.Empty,
+			Identity = request.Cnpj,
 			Email = request.Email,
 			Password = cryptography.EncryptPassword(request.Password)
 		};
 
-		var code = redis.GenerateOneTimePassword(company.AccountId.ToString());
+		await repository.CreateAccountAsync(account);
 
-		await repository.CreateAccountAsync(company);
+		var code = redis.GenerateOneTimePassword(account.AccountId.ToString());
 
 		await sendGridService.SendSignUpAsync(request.Email, code);
 
-		return new ResponseDefault(company.AccountId.ToString(), MessageResponse.CODIGO_ENVIADO_SIGN_UP);
+		return new ResponseDefault
+		{
+			Message = account.AccountId.ToString(),
+			AccountId = MessageResponse.CODIGO_ENVIADO_SIGN_UP
+		};
 	}
 }

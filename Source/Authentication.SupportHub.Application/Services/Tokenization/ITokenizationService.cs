@@ -1,6 +1,6 @@
 ﻿namespace Authentication.SupportHub.Application.Services.Tokenization;
 
-public interface ITokenizationService : IApplicationInjection
+public interface ITokenizationService
 {
 	string GenerateToken(string id);
 	string GenerateRefreshToken();

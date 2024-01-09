@@ -5,7 +5,7 @@ using Authentication.SupportHub.Infrastructure.Contexts;
 
 namespace Authentication.SupportHub.Infrastructure.Repositories;
 
-public class AccountRepository(AuthenticationDbContext context) : IAccountRepository, IInfrastructureInjection
+public class AccountRepository(AuthenticationDbContext context) : IAccountRepository
 {
 	public async Task<Account?> FindAccountByIdAsync(Guid accountId)
 	{
@@ -22,9 +22,9 @@ public class AccountRepository(AuthenticationDbContext context) : IAccountReposi
 		return await context.Accounts!.AsNoTracking().SingleOrDefaultAsync(u => u.Phone == phone);
 	}
 
-	public async Task<Account?> FindAccountByCnpjAsync(string cnpj)
+	public async Task<Account?> FindAccountByIdentityAsync(string identity)
 	{
-		return await context.Accounts!.AsNoTracking().SingleOrDefaultAsync(u => u.Cnpj == cnpj);
+		return await context.Accounts!.AsNoTracking().SingleOrDefaultAsync(u => u.Identity == identity);
 	}
 
 	public async Task CreateAccountAsync(Account account)
@@ -37,13 +37,6 @@ public class AccountRepository(AuthenticationDbContext context) : IAccountReposi
 	public async Task UpdateAccountAsync(Account account)
 	{
 		context.Accounts!.Update(account);
-
-		await SaveChangesAsync();
-	}
-
-	public async Task DeleteAccountAsync(Account account)
-	{
-		context.Accounts!.Remove(account);
 
 		await SaveChangesAsync();
 	}

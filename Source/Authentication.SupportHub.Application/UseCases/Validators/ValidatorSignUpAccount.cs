@@ -6,18 +6,18 @@ using FluentValidation.Results;
 
 namespace Authentication.SupportHub.Application.UseCases.Validators;
 
-public partial class ValidatorSignUpAccount : AbstractValidator<RequestSignUp>
+public partial class ValidatorSignUpAccount : AbstractValidator<RequestSignUpAccount>
 {
 	public ValidatorSignUpAccount()
 	{
 		RuleFor(c => c.Cnpj)
 			.NotEmpty()
-			.WithMessage(MessageException.CNPJ_NAO_INFORMADO)
+			.WithMessage(MessageException.IDENTITY_NAO_INFORMADO)
 			.Custom((cnpj, validator) =>
 			{
 				if (!RegexCnpj().IsMatch(cnpj))
-					validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Cnpj),
-						MessageException.CNPJ_INVALIDO));
+					validator.AddFailure(new ValidationFailure(nameof(RequestSignUpAccount.Cnpj),
+						MessageException.IDENTITY_INVALIDO));
 			});
 
 		RuleFor(c => c.Email)
@@ -36,7 +36,7 @@ public partial class ValidatorSignUpAccount : AbstractValidator<RequestSignUp>
 			.Custom((password, validator) =>
 			{
 				if (!RegexPassword().IsMatch(password))
-					validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Password),
+					validator.AddFailure(new ValidationFailure(nameof(RequestSignUpAccount.Password),
 						MessageException.SENHA_INVALIDA));
 			});
 
@@ -50,7 +50,7 @@ public partial class ValidatorSignUpAccount : AbstractValidator<RequestSignUp>
 			.Custom((password, validator) =>
 			{
 				if (!RegexPassword().IsMatch(password))
-					validator.AddFailure(new ValidationFailure(nameof(RequestSignUp.Password),
+					validator.AddFailure(new ValidationFailure(nameof(RequestSignUpAccount.Password),
 						MessageException.SENHA_INVALIDA));
 			});
 	}

@@ -17,18 +17,24 @@ public class SignInUseCase(
 	IRedisService redis)
 	: ISignInUseCase
 {
-	public async Task<ResponseDefault> ExecuteAsync(RequestSignInCompany request)
+	public async Task<ResponseDefault> ExecuteAsync(RequestSignInAccount request)
 	{
 		var validator = await new ValidatorSignInAccount().ValidateAsync(request);
 		if (!validator.IsValid)
 			throw new DefaultException(validator.Errors.Select(er => er.ErrorMessage).ToList());
 
-		var account = await repository.FindAccountByCnpjAsync(request.Cnpj);
+		var account = await repository.FindAccountByIdentityAsync(request.Identity);
 		if (account is null)
-			throw new DefaultException([MessageException.EMAIL_NAO_ENCONTRADO]);
+			throw new DefaultException([MessageException.IDENTITY_NAO_ENCONTRADO]);
 
 		if (!cryptographyService.VerifyPassword(request.Password, account.Password))
 			throw new DefaultException([MessageException.SENHA_INVALIDA]);
+
+		if (account.IsDisabled)
+			throw new DefaultException([MessageException.CONTA_DESATIVADA]);
+
+		var session = redis.ValidateSessionStorageAsync(account.AccountId.ToString());
+		if (session) throw new DefaultException([MessageException.SESSION_ATIVA]);
 
 		var code = redis.GenerateOneTimePassword(account.AccountId.ToString());
 
@@ -38,13 +44,15 @@ public class SignInUseCase(
 			throw new DefaultException([MessageException.EMAIL_NAO_AUTENTICADO]);
 		}
 
-		await repository.UpdateAccountAsync(account);
-
-		if (account.Is2FaEnabled)
+		if (account.Is2Fa)
 			await twilioService.SendSignInAsync(account.Phone, code);
 		else
 			await sendGridService.SendSignInAsync(account.Email, code);
 
-		return new ResponseDefault(account.AccountId.ToString(), MessageResponse.CODIGO_ENVIADO);
+		return new ResponseDefault
+		{
+			Message = MessageResponse.CODIGO_ENVIADO,
+			AccountId = account.AccountId.ToString()
+		};
 	}
 }

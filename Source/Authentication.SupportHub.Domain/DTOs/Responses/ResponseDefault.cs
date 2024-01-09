@@ -1,7 +1,7 @@
 ﻿namespace Authentication.SupportHub.Domain.DTOs.Responses;
 
-public class ResponseDefault(string accountId, string message)
+public class ResponseDefault
 {
-	public string AccountId { get; set; } = accountId;
-	public string Message { get; set; } = message;
+	public required string AccountId { get; set; }
+	public required string Message { get; set; }
 }

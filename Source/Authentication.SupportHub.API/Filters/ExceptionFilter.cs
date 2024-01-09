@@ -15,13 +15,25 @@ public class ExceptionFilter : IExceptionFilter
 		Console.WriteLine(context.Exception);
 
 		if (context.Exception is DefaultException exception)
-			context.Result = new ObjectResult(new { data = new ResponseException(exception.ErrorMessages!.ToList()) })
+			context.Result = new ObjectResult(new
+			{
+				data = new ResponseException
+				{
+					Mensagens = exception.ErrorMessages!.ToList()
+				}
+			})
 			{
 				StatusCode = (int)HttpStatusCode.BadRequest
 			};
 		else
 			context.Result =
-				new ObjectResult(new { data = new ResponseException([MessageException.ERRO_DESCONHECIDO]) })
+				new ObjectResult(new
+				{
+					data = new ResponseException
+					{
+						Mensagens = [MessageException.ERRO_DESCONHECIDO]
+					}
+				})
 				{
 					StatusCode = (int)HttpStatusCode.InternalServerError
 				};

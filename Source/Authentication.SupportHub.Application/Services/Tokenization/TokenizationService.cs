@@ -77,19 +77,4 @@ public class TokenizationService(IConfiguration configuration) : ITokenizationSe
 		random.GetBytes(salt);
 		return Convert.ToBase64String(salt);
 	}
-
-	public static void DeleteRefreshToken(string refreshToken)
-	{
-		var salt = new byte[32];
-		using var random = RandomNumberGenerator.Create();
-		random.GetBytes(salt);
-	}
-
-	public static string UpdateRefreshToken(string refreshToken)
-	{
-		var salt = new byte[32];
-		using var random = RandomNumberGenerator.Create();
-		random.GetBytes(salt);
-		return Convert.ToBase64String(salt);
-	}
 }

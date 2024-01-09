@@ -6,8 +6,7 @@ public interface IAccountRepository
 {
 	Task<Account?> FindAccountByIdAsync(Guid accountId);
 	Task<Account?> FindAccountByEmailAsync(string email);
-	Task<Account?> FindAccountByCnpjAsync(string cnpj);
+	Task<Account?> FindAccountByIdentityAsync(string identity);
 	Task CreateAccountAsync(Account account);
 	Task UpdateAccountAsync(Account account);
-	Task DeleteAccountAsync(Account account);
 }

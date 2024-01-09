@@ -1,7 +1,7 @@
 ﻿namespace Authentication.SupportHub.Domain.DTOs.Requests;
 
-public class RequestSignInCompany
+public class RequestSignInAccount
 {
-	public required string Cnpj { get; set; }
+	public required string Identity { get; set; }
 	public required string Password { get; set; }
 }
