@@ -3,8 +3,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.Exceptions;
-using Authentication.SupportHub.Domain.Messages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 

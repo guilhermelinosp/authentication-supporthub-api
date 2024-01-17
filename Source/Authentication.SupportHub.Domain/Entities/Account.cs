@@ -14,7 +14,7 @@ public class Account
 	public bool Is2Fa { get; set; }
 	public bool IsVerified { get; set; }
 	public bool IsDisabled { get; set; }
-	public DateTime DisabledAt { get; set; } = DateTime.UtcNow;
 	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 	public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+	public DateTime? DisabledAt { get; set; } = DateTime.UtcNow;
 }

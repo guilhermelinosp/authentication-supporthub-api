@@ -1,0 +1,51 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    strategy:
+      matrix:
+        service: [Authentication]
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3.0.0
+
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Log in to Github Container
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Service Lowercase
+        id: set_service_lowercase
+        run: |
+          service_lowercase=$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')
+          echo "::set-output name=service_lowercase::$service_lowercase"
+
+      - name: Build and Push to Multiple Registries
+        uses: docker/build-push-action@v5.1.0
+        with:
+          context: .
+          file: ./Source/${{ matrix.service }}.SupportHub.API/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.supporthub.api:latest
+            docker.io/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.supporthub.api:latest

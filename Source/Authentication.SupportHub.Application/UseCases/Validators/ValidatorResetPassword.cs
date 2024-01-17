@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.DTOs.Requests;
-using Authentication.SupportHub.Domain.Messages;
 using FluentValidation;
 using FluentValidation.Results;
 

@@ -1,7 +1,7 @@
 using System.Net;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.DTOs.Responses;
 using Authentication.SupportHub.Domain.Exceptions;
-using Authentication.SupportHub.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

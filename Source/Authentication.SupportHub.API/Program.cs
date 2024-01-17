@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
 
-await AuthenticationDbContextFactory.Create(configuration["ConnectionStrings:SqlServer"]!);
+await AuthenticationDbContextFactory.CreateAsync(configuration["ConnectionStrings:SqlServer"]!);
 
 services.AddApplicationInjection(configuration);
 services.AddAuthenticationConfiguration(configuration);

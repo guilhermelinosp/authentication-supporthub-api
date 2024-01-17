@@ -1,0 +1,27 @@
+name: .NET Dependency CI
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  dependency:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: 'Setup .NET'
+        uses: actions/setup-dotnet@v4
+
+      - name: 'Restore Dependencies'
+        run: dotnet restore
+
+      - name: 'Run Dependency Review'
+        uses: actions/dependency-review-action@v3
+
+

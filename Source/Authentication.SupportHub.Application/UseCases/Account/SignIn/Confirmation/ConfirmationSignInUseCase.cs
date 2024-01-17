@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using Authentication.SupportHub.Application.Services.Tokenization;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.DTOs.Responses;
 using Authentication.SupportHub.Domain.Exceptions;
-using Authentication.SupportHub.Domain.Messages;
 using Authentication.SupportHub.Domain.Services;
 using Microsoft.Extensions.Configuration;
 

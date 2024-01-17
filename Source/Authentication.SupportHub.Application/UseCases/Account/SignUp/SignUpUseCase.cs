@@ -1,10 +1,12 @@
 ﻿using Authentication.SupportHub.Application.Services.Cryptography;
 using Authentication.SupportHub.Application.UseCases.Validators;
 using Authentication.SupportHub.Domain.APIs;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.DTOs.Requests;
 using Authentication.SupportHub.Domain.DTOs.Responses;
+using Authentication.SupportHub.Domain.DTOs.Responses.BrazilAPI;
+using Authentication.SupportHub.Domain.Entities;
 using Authentication.SupportHub.Domain.Exceptions;
-using Authentication.SupportHub.Domain.Messages;
 using Authentication.SupportHub.Domain.Repositories;
 using Authentication.SupportHub.Domain.Services;
 
@@ -14,7 +16,7 @@ public class SignUpUseCase(
 	IAccountRepository repository,
 	ICryptographyService cryptography,
 	ISendGridService sendGridService,
-	IBrazilApi brazilApi,
+	IBrazilAPI brazilApi,
 	IRedisService redis)
 	: ISignUpUseCase
 {
@@ -24,9 +26,7 @@ public class SignUpUseCase(
 		if (!validatorRequest.IsValid)
 			throw new DefaultException(validatorRequest.Errors.Select(er => er.ErrorMessage).ToList());
 
-		var checkCnpj = await brazilApi.Consultation(request.Cnpj);
-		if (!checkCnpj)
-			throw new DefaultException([MessageException.IDENTITY_INVALIDO]);
+		var consultation = await brazilApi.Consultation(request.Cnpj);
 
 		var validateCnpj = await repository.FindAccountByIdentityAsync(request.Cnpj);
 		if (validateCnpj is not null)
@@ -48,6 +48,13 @@ public class SignUpUseCase(
 
 		await repository.CreateAccountAsync(account);
 
+		await repository.CreateCompanyAsync(new Company
+		{
+			Name = consultation!.RazaoSocial,
+			Cnpj = request.Cnpj,
+			AccountId = account.AccountId
+		});
+
 		var code = redis.GenerateOneTimePassword(account.AccountId.ToString());
 
 		await sendGridService.SendSignUpAsync(request.Email, code);
@@ -55,7 +62,7 @@ public class SignUpUseCase(
 		return new ResponseDefault
 		{
 			Message = account.AccountId.ToString(),
-			AccountId = MessageResponse.CODIGO_ENVIADO_SIGN_UP
+			AccountId = MessageResponse.EMAIL_ENVIADO
 		};
 	}
 }

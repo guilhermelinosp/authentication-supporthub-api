@@ -1,5 +1,5 @@
-﻿using Authentication.SupportHub.Domain.DTOs.Requests;
-using Authentication.SupportHub.Domain.Messages;
+﻿using Authentication.SupportHub.Domain.DTOs.Messages;
+using Authentication.SupportHub.Domain.DTOs.Requests;
 using FluentValidation;
 
 namespace Authentication.SupportHub.Application.UseCases.Validators;

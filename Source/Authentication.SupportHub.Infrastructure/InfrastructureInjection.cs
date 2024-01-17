@@ -39,7 +39,7 @@ public static class InfrastructureInjection
 
 	private static void AddApis(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddHttpClient<IBrazilApi, BrazilApi>(options =>
+		services.AddHttpClient<IBrazilAPI, BrazilApi>(options =>
 		{
 			options.BaseAddress = new Uri(configuration["BrazilApi:Url"]!);
 		});

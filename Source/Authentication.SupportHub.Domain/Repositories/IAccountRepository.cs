@@ -8,5 +8,6 @@ public interface IAccountRepository
 	Task<Account?> FindAccountByEmailAsync(string email);
 	Task<Account?> FindAccountByIdentityAsync(string identity);
 	Task CreateAccountAsync(Account account);
+	Task CreateCompanyAsync(Company company);
 	Task UpdateAccountAsync(Account account);
 }

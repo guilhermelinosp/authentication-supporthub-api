@@ -1,0 +1,35 @@
+name: .NET Build CI
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 'Setup .NET'
+      uses: actions/setup-dotnet@v4
+
+    - name: Cache Dependencies
+      uses: actions/cache@v3
+      with:
+        path: '**/obj/project.assets.json'
+        key: dotnet-dependencies-${{ matrix.os }}-${{ hashFiles('**/project.assets.json') }}
+        restore-keys: |
+          dotnet-dependencies-${{ matrix.os }}-
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore

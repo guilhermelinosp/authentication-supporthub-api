@@ -7,10 +7,10 @@ using Authentication.SupportHub.Application.UseCases.Account.SignIn.Confirmation
 using Authentication.SupportHub.Application.UseCases.Account.SignOut;
 using Authentication.SupportHub.Application.UseCases.Account.SignUp;
 using Authentication.SupportHub.Application.UseCases.Account.SignUp.Confirmation;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.DTOs.Requests;
 using Authentication.SupportHub.Domain.DTOs.Responses;
 using Authentication.SupportHub.Domain.Exceptions;
-using Authentication.SupportHub.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 
 

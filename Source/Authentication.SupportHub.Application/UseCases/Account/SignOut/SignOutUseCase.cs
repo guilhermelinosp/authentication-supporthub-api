@@ -1,6 +1,6 @@
 ﻿using Authentication.SupportHub.Application.Services.Tokenization;
+using Authentication.SupportHub.Domain.DTOs.Messages;
 using Authentication.SupportHub.Domain.DTOs.Responses;
-using Authentication.SupportHub.Domain.Messages;
 using Authentication.SupportHub.Domain.Services;
 
 namespace Authentication.SupportHub.Application.UseCases.Account.SignOut;
