@@ -22,6 +22,6 @@ jobs:
         run: dotnet restore
 
       - name: 'Run Dependency Review'
-        uses: actions/dependency-review-action@v3
+        uses: actions/dependency-review-action@v4
 
 
