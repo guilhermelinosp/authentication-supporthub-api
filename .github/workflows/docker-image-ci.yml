@@ -41,7 +41,7 @@ jobs:
           echo "::set-output name=service_lowercase::$service_lowercase"
 
       - name: Build and Push to Multiple Registries
-        uses: docker/build-push-action@v5.1.0
+        uses: docker/build-push-action@v5.2.0
         with:
           context: .
           file: ./Source/${{ matrix.service }}.SupportHub.API/Dockerfile
